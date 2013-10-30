@@ -107,7 +107,7 @@ export HISTTIMEFORMAT="%F %T "
  alias hs='history | grep '
 
 # Some shortcuts for different directory listings
- alias ls='ls -hF --color=tty'                 # classify files in colour
+ alias ls='ls -hF --color=tty --group-directories-first'                 # classify files in colour
 # alias dir='ls --color=auto --format=vertical'
 # alias vdir='ls --color=auto --format=long'
  alias ll='ls -l'                              # long list
@@ -122,6 +122,8 @@ alias ....='cd ../../..'
 # cd into the old directory
 alias bd='cd "$OLDPWD"'
 
+# Other
+alias serve='python -m SimpleHTTPServer'
 
 # Functions
 # #########
@@ -147,14 +149,31 @@ function __setprompt {
 }
 __setprompt
 
+# VirtualEnvWrapper
+export WORKON_HOME=~/Virtualenvs
+source /usr/bin/virtualenvwrapper.sh
+
+# Set Vim as the man pager
+#export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 
 
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
 
 
+# 256 color terminal support
+export TERM="xterm-256color"
 
+# git auto completion
+source /usr/share/git/completion/git-completion.bash
 
-
-
-
-
-#PS1='[\u@\h][\@] [\w ][$?]\$'
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
+export BROWSER=/usr/bin/chromium
