@@ -1,6 +1,22 @@
 #!/bin/bash
 
-# Setup bash
-echo "Setting up Bash"
-stow -v bash
-source ~/.bashrc
+function delete_existing_file {
+    file=$1
+
+    if [ -f ~/.bashrc ]; then
+        read -p "Delete previously existing $file?" -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm "~/$file"
+        else
+            exit 1
+        fi
+    fi
+}
+
+function setup_bash {
+    delete_existing_file ~/.bashrc
+    stow -v bash
+    source ~/.bashrc
+}
+
+setup_bash
