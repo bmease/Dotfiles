@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Setup bash
+echo "Setting up Bash"
+stow -v bash
+source ~/.bashrc
