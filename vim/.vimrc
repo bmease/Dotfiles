@@ -6,13 +6,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:
 Bundle 'scrooloose/nerdtree'
 Bundle 'nanotech/jellybeans.vim'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'klen/python-mode'
 Bundle 'samsonw/vim-task'
 Bundle 'msanders/snipmate.vim'
@@ -20,6 +21,8 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'rking/ag.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
 
 filetype plugin indent on     " required!
 "
@@ -79,8 +82,8 @@ set mat=2
 let mapleader=','
 
   " Edit/reload the vimrc filo
-  nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR> 
-  nmap <leader>sv :so $MYVIMRC<CR> 
+  nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
+  nmap <leader>sv :so $MYVIMRC<CR>
 
   " Search
   nmap <silent> <leader>/ :nohlsearch<CR>
@@ -88,6 +91,7 @@ let mapleader=','
   " Plugins
   nmap <silent> <leader>nt :NERDTree<CR>
   nmap <silent> <leader>g :Rgrep<CR>
+  nmap <leader>gs :Gstatus<CR>
 
 
 
@@ -117,6 +121,7 @@ let g:Powerline_symbols = 'compatible'
 "let g:Powerline_symbols = 'fancy'
 
 "let g:jellybeans_use_lowcolor_black = 0
+let g:jellybeans_overrides = { 'Signcolumn': { 'guibg': '1c1c1c' }}
 
 " colorscheme
 colorscheme jellybeans
@@ -124,3 +129,7 @@ colorscheme jellybeans
 
 " fold coffeescript
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+
+" Airline Settings
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
