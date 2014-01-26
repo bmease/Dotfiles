@@ -1,7 +1,20 @@
 #!/bin/bash
 
+function install_program {
+    local program=$1
+
+    if ! hash ${program} 2>/dev/null; then
+        read -p "$program is not installed, would you like to install it? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            sudo apt-get install ${program}
+        else
+            exit 1
+        fi
+    fi
+}
+
 function delete_existing_file {
-    file=$1
+    local file=$1
 
     if [ -f ~/.bashrc ]; then
         read -p "Delete previously existing file?: $file (y/n) " -n 1 -r
@@ -17,7 +30,25 @@ function delete_existing_file {
 function setup_bash {
     delete_existing_file ~/.bashrc
     stow -v bash
-    . ~/.bashrc
 }
 
+function setup_vim {
+    install_program vim
+    stow -v vim
+
+    # install vundle
+    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    vim +BundleInstall! +BundleClean +q
+}
+
+function setup_tmux {
+    install_program tmux
+    stow -v tmux
+}
+
+install_program stow
 setup_bash
+setup_vim
+setup_tmux
+
+echo "Done!"
