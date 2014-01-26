@@ -6,7 +6,7 @@ function delete_existing_file {
     if [ -f ~/.bashrc ]; then
         read -p "Delete previously existing $file? (y/n) " -n 1 -r
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            rm "~/$file"
+            rm ${file}
             echo
         else
             exit 1
