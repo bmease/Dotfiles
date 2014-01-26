@@ -6,6 +6,7 @@ function install_program {
     if ! hash ${program} 2>/dev/null; then
         read -p "$program is not installed, would you like to install it? (y/n) " -n 1 -r
         if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo
             sudo apt-get install ${program}
         else
             exit 1
@@ -19,8 +20,8 @@ function delete_existing_file {
     if [ -f ~/.bashrc ]; then
         read -p "Delete previously existing file?: $file (y/n) " -n 1 -r
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            rm ${file}
             echo
+            rm ${file}
         else
             exit 1
         fi
