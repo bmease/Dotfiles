@@ -4,7 +4,7 @@ function delete_existing_file {
     file=$1
 
     if [ -f ~/.bashrc ]; then
-        read -p "Delete previously existing $file? (y/n) " -n 1 -r
+        read -p "Delete previously existing file?: $file (y/n) " -n 1 -r
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             rm ${file}
             echo
@@ -17,7 +17,7 @@ function delete_existing_file {
 function setup_bash {
     delete_existing_file ~/.bashrc
     stow -v bash
-    source ~/.bashrc
+    . ~/.bashrc
 }
 
 setup_bash
