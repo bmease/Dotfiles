@@ -7,7 +7,7 @@ function install_program {
         read -p "$program is not installed, would you like to install it? (y/n) " -n 1 -r
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo
-            sudo apt-get install ${program}
+            sudo apt-get -y install ${program}
         else
             exit 1
         fi
@@ -39,7 +39,7 @@ function setup_vim {
 
     # install vundle
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-    vim +BundleInstall! +BundleClean +q
+    vim +BundleInstall! +BundleClean +q +q  # quit twice cause it opens in a split?
 }
 
 function setup_tmux {
