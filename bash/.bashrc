@@ -124,6 +124,7 @@ alias bd='cd "$OLDPWD"'
 
 # Other
 alias serve='python -m SimpleHTTPServer'
+alias bc='bc -l'  # start with math features and division
 
 # Functions
 # #########
