@@ -111,6 +111,7 @@ set expandtab
 
 " Line numbers
 set number
+set relativenumber
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc']
