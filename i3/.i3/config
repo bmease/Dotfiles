@@ -66,10 +66,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+#bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -79,6 +79,10 @@ bindsym $mod+a focus parent
 
 # Return to last workspace by repeating the change workspace command
 workspace_auto_back_and_forth yes
+
+# scratchpad
+bindsym $mod+Shift+space move scratchpad
+bindsym $mod+space scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -141,9 +145,12 @@ bar {
 }
 
 # Hide Chromium border
-for_window [class="^Chromium$" title=" - Chromium$"] border pixel 2
-for_window [title="Chrome$"] border pixel 2
-for_window [class="^Firefox$"] border pixel 2
+#for_window [class="^Chromium$" title=" - Chromium$"] border pixel 2
+#for_window [title="Chrome$"] border pixel 2
+#for_window [class="^Firefox$"] border pixel 2
+
+# Hide all window titles
+for_window [class="^.*"] border pixel 2
 
 # Colors
 client.focused #4c7899 #1A9CBC #cccccc #2e9ef4
