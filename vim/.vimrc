@@ -93,6 +93,9 @@ let mapleader=','
   nmap <silent> <leader>g :Rgrep<CR>
   nmap <leader>gs :Gstatus<CR>
 
+  " toggle paste
+  nmap <leader>p :set paste! paste?<cr>
+
 
 
 set noswapfile
@@ -112,6 +115,10 @@ set expandtab
 " Line numbers
 set number
 set relativenumber
+
+" Python-mode
+" Don't show doc menu when autocompleting
+set completeopt=menu
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc']
@@ -134,3 +141,6 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " Airline Settings
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
+
+" Filesettings
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown spell linebreak
