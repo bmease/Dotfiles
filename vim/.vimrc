@@ -23,6 +23,8 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'tomtom/tcomment_vim'
 
 filetype plugin indent on     " required!
 "
@@ -60,6 +62,9 @@ map <C-l> <C-w>l
 " Fold with spacebar
 nnoremap <Space> za
 
+" Don't fold when opening files
+set foldlevelstart=99
+
 " Highlight long lines
 set colorcolumn=79
 
@@ -95,6 +100,9 @@ let mapleader=','
 
   " toggle paste
   nmap <leader>p :set paste! paste?<cr>
+
+  " toggle spell
+  nmap <leader>s :set spell! spell?<cr>
 
 
 
@@ -144,3 +152,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Filesettings
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown spell linebreak
+
+" Open quickfix window after grep
+autocmd QuickFixCmdPost *grep* cwindow
