@@ -172,9 +172,6 @@ complete -o default -F _pip_completion pip
 # 256 color terminal support
 export TERM="xterm-256color"
 
-# git auto completion
-source /usr/share/git/completion/git-completion.bash
-
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export BROWSER=/usr/bin/chromium
