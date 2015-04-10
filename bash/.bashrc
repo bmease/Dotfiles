@@ -151,8 +151,8 @@ function __setprompt {
 __setprompt
 
 # VirtualEnvWrapper
-export WORKON_HOME=~/Virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+# export WORKON_HOME=~/Virtualenvs
+# source /usr/bin/virtualenvwrapper.sh
 
 # Set Vim as the man pager
 #export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
