@@ -1,9 +1,11 @@
 [user]
 	email = bmease@gmail.com
-	name = Brad Mease
+	name = Bradley Mease
 [color]
 	ui = auto
 [github]
 	user = bmease@gmail.com
 [core]
 	excludesfile = /home/brad/.gitignore_global
+[push]
+    default = simple
