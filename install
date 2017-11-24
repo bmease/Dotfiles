@@ -49,7 +49,7 @@ function setup_nvim {
     sudo apt-get install python-dev python-pip python3-dev python3-pip
 
     install_program neovim
-    install_program python3-nvim
+    sudo pip3 install --upgrade neovim
     stow -v nvim
 
     # install vim-plugged
