@@ -80,8 +80,9 @@ function install_development {
 
     echo "Installing Javascript Development Tools"
     install_program nodejs
-    install_program npm
     sudo ln -s /usr/bin/nodejs /usr/bin/node  # fix ubuntu being dumb
+
+    install_program npm
 
     sudo npm install -g eslint
     sudo npm install -g babel-eslint
