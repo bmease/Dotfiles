@@ -85,6 +85,11 @@ function install_development {
     sudo npm install -g babel-eslint
     sudo npm install -g eslint-plugin-vue@beta
 
+    echo "Installing Generic Development Tools"
+    install_program exuberant-ctags
+    stow -v ctags
+    stow -v git
+
     install_base
 }
 
