@@ -50,7 +50,7 @@ function setup_nvim {
 
     install_program neovim
     install_program python3-nvim
-    stow -v vim
+    stow -v nvim
 
     # install vim-plugged
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
