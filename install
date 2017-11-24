@@ -43,7 +43,8 @@ function setup_vim {
 }
 
 function setup_nvim {
-    install_program nvim
+    install_program neovim
+    install_program python3-nvim
     stow -v vim
 
     # install vim-plugged
