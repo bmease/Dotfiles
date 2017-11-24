@@ -75,7 +75,8 @@ function install_standard {
 
 function install_development {
     echo "Installing Python Development Tools"
-    pip3 -r dev-python-requirements.txt
+    install_program python3-pip
+    pip3 install -r dev-python-requirements.txt
 
     echo "Installing Javascript Development Tools"
     install_program nodejs
