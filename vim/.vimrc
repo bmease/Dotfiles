@@ -25,6 +25,9 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'posva/vim-vue'
+Bundle 'jeetsukumaran/vim-buffergator'
+
 
 filetype plugin indent on     " required!
 "
@@ -104,6 +107,9 @@ let mapleader=','
   " toggle spell
   nmap <leader>s :set spell! spell?<cr>
 
+  " Buffers
+  " nmap <leader>b :buffers<CR>:buffer<Space>
+
 
 
 set noswapfile
@@ -124,9 +130,13 @@ set expandtab
 set number
 set relativenumber
 
+" Diff options
+set diffopt=vertical,filler
+
 " Python-mode
 " Don't show doc menu when autocompleting
 set completeopt=menu
+let g:pymode_breakpoint = 0
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc']
@@ -155,3 +165,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown spell linebreak
 
 " Open quickfix window after grep
 autocmd QuickFixCmdPost *grep* cwindow
+
+" Switch buffers without saving
+set hidden
