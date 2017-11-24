@@ -1,11 +1,10 @@
 [user]
 	email = bmease@gmail.com
 	name = Bradley Mease
-[color]
-	ui = auto
-[github]
-	user = bmease@gmail.com
+
 [core]
-	excludesfile = /home/brad/.gitignore_global
-[push]
-    default = simple
+    editor = nvim
+	excludesfile = /home/brad/.gitignore
+
+[diff]
+    tool = vimdiff
