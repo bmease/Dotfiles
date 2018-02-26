@@ -42,15 +42,90 @@ function setup_vim {
     vim +BundleInstall! +BundleClean +q +q  # quit twice cause it opens in a split?
 }
 
+function setup_nvim {
+    install_program software-properties-common
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install python-dev python-pip python3-dev python3-pip
+
+    install_program neovim
+    sudo pip3 install --upgrade neovim
+    stow -v nvim
+
+    # install vim-plugged
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    nvim +PlugInstall +q
+}
+
 function setup_tmux {
     install_program tmux
     stow -v tmux
 }
 
-install_program stow
-setup_bash
-setup_vim
-setup_tmux
 
-echo "Done!"
-echo "Remember to source ~/.bashrc"
+function install_base {
+    install_program stow
+    setup_bash
+    setup_nvim
+    setup_tmux
+
+    echo "Done!"
+    echo "Remember to source ~/.bashrc"
+}
+
+function install_standard {
+    install_base
+}
+
+function install_development {
+    echo "Installing Python Development Tools"
+    install_program python3-pip
+    pip3 install -r dev-python-requirments.txt
+
+    echo "Installing Javascript Development Tools"
+    install_program nodejs
+    sudo ln -s /usr/bin/nodejs /usr/bin/node  # fix ubuntu being dumb
+
+    install_program npm
+
+    sudo npm install -g eslint
+    sudo npm install -g babel-eslint
+    sudo npm install -g eslint-plugin-vue@beta
+
+    echo "Installing Generic Development Tools"
+    install_program exuberant-ctags
+    stow -v ctags
+    stow -v git
+
+    install_base
+}
+
+function install_production {
+    # TODO: setup bash prompt to be red
+
+    install_base
+}
+
+title="Select type of environment"
+prompt="choice: "
+options=("Standard" "Development" "Production")
+
+echo -e "$title\n"
+PS3="$prompt"
+
+select opt in "${options[@]}" "Quit"; do
+
+    case "$REPLY" in
+
+        1 ) install_standard;;
+        2 ) install_development;;
+        3 ) install_production;;
+
+        $(( ${#options[@]}+1 )) ) echo "Quit"; break;;
+        * ) echo invalid option; continue;;
+
+    esac
+
+done

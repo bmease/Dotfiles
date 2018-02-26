@@ -1,11 +1,18 @@
 [user]
 	email = bmease@gmail.com
 	name = Bradley Mease
-[color]
-	ui = auto
-[github]
-	user = bmease@gmail.com
+
 [core]
+    editor = nvim
 	excludesfile = /home/brad/.gitignore_global
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    prompt = true
+
+[mergetool "vimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [push]
-    default = simple
+	default = simple

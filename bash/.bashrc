@@ -177,3 +177,5 @@ export TERM="xterm-256color"
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export BROWSER=/usr/bin/google-chrome-stable
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
