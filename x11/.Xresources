@@ -37,4 +37,4 @@ Xcursor.size: 22
 URxvt.scrollstyle: plain
 URxvt.scrollBar_right: True
 !URxvt*font: xft:Source Code Pro:size=12
-URxvt*font: xft:Source Code Pro for Powerline:size=12
+URxvt*font: xft:Sauce Code Pro Black Nerd Font Complete.ttf:size=12
