@@ -170,7 +170,7 @@ complete -o default -F _pip_completion pip
 
 
 # 256 color terminal support
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
