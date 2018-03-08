@@ -126,6 +126,8 @@ alias bd='cd "$OLDPWD"'
 alias serve='python -m SimpleHTTPServer'
 alias bc='bc -l'  # start with math features and division
 
+alias ss='scrot '"'"'%F-%T.png'"'"' -s -e '"'"'mv $f ~/Screenshots/'"'"
+
 # Functions
 # #########
 
@@ -174,6 +176,6 @@ complete -o default -F _pip_completion pip
 
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
-export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/google-chrome-stable
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -24,7 +24,8 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st -t "Suckless Terminal" -f "SauceCodePro Nerd Font:size=14"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -154,3 +155,6 @@ for_window [class="^.*"] border pixel 2
 
 # Colors
 client.focused #4c7899 #1A9CBC #cccccc #2e9ef4
+
+# Use compton
+exec_always compton --daemon
