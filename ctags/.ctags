@@ -10,3 +10,4 @@
 --exclude=*/site-packages/*
 --exclude=*/vendor/*
 --exclude=*min.js
+--options=/home/brad/Src/ctags-patterns-for-javascript/.ctags
