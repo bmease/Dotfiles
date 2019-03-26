@@ -131,16 +131,27 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
 
-" }}} Vim Signature {{{3
+" Vim Signature {{{3
 " Plugin to toggle, display and navigate marks
 Plug 'kshenoy/vim-signature'
 
-" }}} Vim Markbar {{{3
+" Vim Markbar {{{3
 " Plug 'Yilin-Yang/vim-markbar'
 
-" }}} Vim Peekaboo {{{3
+" Vim Peekaboo {{{3
 " Peekaboo extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
 Plug 'junegunn/vim-peekaboo'
+
+" Vista {{{3
+" View and search LSP symbols, tags in Vim
+Plug 'liuchengxu/vista.vim'
+let g:vista_default_executive = 'coc'
+
+" Toggle vista tagbar
+nmap <silent> <leader>t :Vista!!<CR>
+
+
+
 
 " }}}
 
@@ -396,9 +407,6 @@ let mapleader=','
 
     " Toggle linting
     " nmap <leader>l :ALEToggle<CR>
-
-    " Toggle tagbar
-    nmap <silent> <leader>t :TagbarToggle<CR>
 
     " Rename
     " nmap <leader>r :call RopeRename()
