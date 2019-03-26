@@ -1,7 +1,7 @@
 " TODO {{{1
 
 " Reference {{{2
-"
+
 "  https://github.com/mhinz/vim-galore
 "  https://github.com/akrawchyk/awesome-vim
 "  http://learnvimscriptthehardway.stevelosh.com/
@@ -9,13 +9,13 @@
 
 
 " Reference .vimrc {{{2
-"
+
 "  https://bitbucket.org/sjl/dotfiles/
 "  https://github.com/agkozak/dotfiles/blob/master/.vimrc
 "  https://github.com/Gandalf-/DotFiles/blob/master/etc/vimrc
 "  https://github.com/robertmeta/vimfiles/blob/master/vimrc
-"
-"
+
+
 " Plugins to consider {{{2
 
 "  https://github.com/carlitux/deoplete-ternjs
@@ -47,7 +47,6 @@
 " :PlugSnapshot | Generate script for restoring plugins
 
 " Auto Install Vim Plug {{{2
-
 " Install vim-plug if not already installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -59,10 +58,12 @@ call plug#begin('~/.config/nvim/plugged')
 
 " }}}
 
-" User Interface {{{2
 
+" User Interface {{{2
 " Plug 'yuttie/comfortable-motion.vim'
+
 " Lightline {{{3
+" A light and configurable statusline/tabline plugin
 Plug 'itchyny/lightline.vim'
 
 function! LightlineReadonly()
@@ -112,36 +113,23 @@ let g:lightline = {
 " lightline displays mode instead
 set noshowmode
 
-" }}} Jellybeans {{{3
+" Jellybeans {{{3
+" A colorful, dark color scheme for Vim
 Plug 'nanotech/jellybeans.vim'
 
-" }}} Devicons {{{3
+" Devicons {{{3
+" Adds file type glyphs/icons to popular Vim plugins
+" NOTE: Might not need this anymore
 Plug 'ryanoasis/vim-devicons'
 
-" }}} Highlighted Yank {{{3
+" Highlighted Yank {{{3
+" Make the yanked region apparent
 Plug 'machakann/vim-highlightedyank'
 
-" }}} Maximizer {{{3
+" Maximizer {{{3
+" Maximizes and restores the current window in Vim
 Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
-
-" }}} Tagbar {{{3
-Plug 'majutsushi/tagbar'
-let g:tagbar_type_javascript = {
-    \ 'kinds' : [
-        \ 'A:Arrays',
-        \ 'C:Classes',
-        \ 'E:Exports',
-        \ 'F:Functions',
-        \ 'G:Generators',
-        \ 'I:Imports',
-        \ 'M:Methods',
-        \ 'P:Properties',
-        \ 'O:Objects',
-        \ 'T:Tags',
-        \ 'V:Variables'
-    \ ],
-\ }
 
 " }}} Vim Signature {{{3
 " Plugin to toggle, display and navigate marks
@@ -160,7 +148,7 @@ Plug 'junegunn/vim-peekaboo'
 
 " }}} Polygot {{{3
 " A collection of language packs for Vim.
-Plug 'sheerun/vim-polyglot'  " Syntax Highlighting for many languages
+Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['vue']
 
 " }}} Vue {{{3
@@ -269,113 +257,33 @@ Plug 'mattn/webapi-vim'
 
 " }}} Rhubarb {{{3
 Plug 'tpope/vim-rhubarb'
-" Plug 'SevereOverfl0w/deoplete-github'
-
-
-
 
 " Completion {{{2
 
-" Plug 'zchee/deoplete-jedi'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
 " COC {{{3
+" Intellisense engine for vim8 & neovim, full language server protocol support as VSCode
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 nnoremap <silent> <leader>l :<C-u>CocList<cr>
 
-
-" Deoplete {{{3
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"
-" let g:deoplete#enable_at_startup = 1
-"
-" " Setup Icons for deoplete
-" function! SetupDeopleteIcons()
-"     if v:vim_did_enter
-"     else
-"         call deoplete#custom#source('around',        'mark', '↻')
-"         call deoplete#custom#source('buffer',        'mark', 'ℬ')
-"         call deoplete#custom#source('github',        'mark', '')
-"         call deoplete#custom#source('jedi',          'mark', '')
-"         call deoplete#custom#source('member',        'mark', '.')
-"         call deoplete#custom#source('neosnippet',    'mark', '⌘')
-"         call deoplete#custom#source('omni',          'mark', '⌾')
-"         call deoplete#custom#source('syntax',        'mark', '♯')
-"         call deoplete#custom#source('tag',           'mark', '⌦')
-"         call deoplete#custom#source('vim',           'mark', '')
-"         call deoplete#custom#source('tern',          'mark', '')
-"     endif
-" endfunction
-"
-" augroup DeopleteIcons
-"     autocmd!
-"     autocmd! VimEnter * call SetupDeopleteIcons()
-" augroup END
-
-" Trying to setup deoplete to use vim-rhubarb or deoplete-github
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.gitcommit = ['github']
-"
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['gitcommit'] = ['github']
-
-" let g:deoplete#sources = {}
-" let g:deoplete#sources.gitcommit = []
-"
-" let g:deoplete#keyword_patterns = {}
-" "let g:deoplete#keyword_patterns.gitcommit = '[^ \t]+'
-" let g:deoplete#keyword_patterns.gitcommit = '.+'
-"
-" if !exists('g:deoplete#omni#input_patterns')
-"     let g:deoplete#omni#input_patterns = {}
-" endif
-"
-" call deoplete#util#set_pattern(
-"   \ g:deoplete#omni#input_patterns,
-"   \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
-
-
-" LanguageClient-neovim {{{3
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-"
-" let g:LanguageClient_selectionUI = "location-list"
-" let g:LanguageClient_diagnosticsList = "Location"
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['javascript-typescript-stdio'],
-"     \ 'vue': ['vls'],
-"     \ 'python': ['pyls'],
-"     \ }
-"
-" nnoremap <silent> <leader>l :call LanguageClient_contextMenu()<CR>
-" nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
-" nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
-"}}}
-
-" }}} Utilisnips {{{3
+" Utilisnips {{{3
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 
-" }}} Auto-pairs {{{3
+" Auto-pairs {{{3
 Plug 'jiangmiao/auto-pairs'
 
-" }}} Vim Snippets {{{3
+" Vim Snippets {{{3
 Plug 'honza/vim-snippets'
 
-" }}} Supertab {{{3
+" Supertab {{{3
 Plug 'ervandew/supertab'
 
 let g:SuperTabDefaultCompletionType = '<c-n>'
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 
-" }}} NERD Commenter {{{3
+" NERD Commenter {{{3
 Plug 'scrooloose/nerdcommenter'
 
 let g:NERDCommentEmptyLines = 1
@@ -384,13 +292,13 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" }}} Vim Gutentags {{{3
+" Vim Gutentags {{{3
 Plug 'ludovicchabant/vim-gutentags'
 
-" }}} Editorconfig {{{3
+" Editorconfig {{{3
 Plug 'editorconfig/editorconfig-vim'
 
-" }}} Utilisnips {{{3
+" JSDoc {{{3
 Plug 'heavenshell/vim-jsdoc'
 
 let g:javascript_plugin_jsdoc = 1
@@ -406,37 +314,6 @@ let g:jsdoc_user_defined_tags = {
 nmap <leader>j :JsDoc<CR>
 
 " Linting {{{2
-
-" ALE {{{3
-" Plug 'w0rp/ale'
-" let g:ale_completion_enabled = 1
-"
-" let g:ale_open_list = 1
-" let g:ale_set_loclist = 1
-" let g:ale_set_quickfix = 0
-" let g:ale_sign_error = ''
-" let g:ale_sign_warning = ''
-" let g:ale_list_window_size = 5
-"
-" let g:ale_echo_msg_format = '[%severity%][%linter%][%code%] %s '
-" let g:ale_echo_msg_error_str = ''
-" let g:ale_echo_msg_warning_str = ''
-" let g:ale_echo_msg_info_str =  ''
-"
-" let g:ale_python_flake8_executable = 'python3.6'
-" let g:ale_python_flake8_options = '-m flake8'
-" let g:ale_python_pylint_executable = 'python3.6'
-" let g:ale_python_pylint_options = '-m pylint'
-"
-" let g:ale_linters = {}
-" " Use LanguageClient to handle linting
-" " let g:ale_linters.python = ['yapf', 'flake8', 'pylint', 'isort']
-" let g:ale_linters.javascript = ['eslint', 'prettier']
-"
-" let g:ale_fixers = {}
-" let g:ale_fixers.python = ['yapf', 'isort']  " Flake8 and pylint throw error?
-" let g:ale_fixers.javascript = ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace']
-" let g:ale_fixers.vue = ['prettier', 'eslint']
 
 " Editing {{{2 
 
@@ -467,11 +344,13 @@ augroup SubmodeConfig
 augroup END
 
 " Targets {{{3
+" Vim plugin that provides additional text objects
 Plug 'wellle/targets.vim'
 
 
 " Tmux {{{2
 " Tmux Navigator {{{3
+" NOTE: might not need this?
 Plug 'christoomey/vim-tmux-navigator'
 
 " }}} Tmux Focus Events {{{3
