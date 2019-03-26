@@ -29,7 +29,6 @@
 "  https://github.com/numirias/semshi
 "  https://github.com/othree/javascript-libraries-syntax.vim
 "  https://github.com/liuchengxu/vim-which-key
-"  https://github.com/wellle/targets.vim
 "  https://github.com/terryma/vim-expand-region
 "  https://wakatime.com/
 
@@ -86,7 +85,7 @@ let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \             ['fugitive', 'readonly', 'relativepath', 'modified'] ],
+    \             ['cocstatus', 'fugitive', 'readonly', 'relativepath', 'modified'] ],
     \   'right': [ [ 'lineinfo' ], [ 'percent' ], ['filetype'], ['gutentags'] ]
     \ },
     \
@@ -102,7 +101,8 @@ let g:lightline = {
     \ 'component_function': {
     \   'readonly': 'LightlineReadonly',
     \   'fugitive': 'LightlineFugitive',
-    \   'gutentags': 'LightlineGutentags'
+    \   'gutentags': 'LightlineGutentags',
+    \   'cocstatus': 'coc#status'
     \ },
     \
     \ 'separator': { 'left': '', 'right': '' },
@@ -144,20 +144,22 @@ let g:tagbar_type_javascript = {
 \ }
 
 " }}} Vim Signature {{{3
+" Plugin to toggle, display and navigate marks
 Plug 'kshenoy/vim-signature'
 
 " }}} Vim Markbar {{{3
 " Plug 'Yilin-Yang/vim-markbar'
 
 " }}} Vim Peekaboo {{{3
+" Peekaboo extends " and @ in normal mode and <CTRL-R> in insert mode so you can see the contents of the registers.
 Plug 'junegunn/vim-peekaboo'
-
-
 
 " }}}
 
 " Language Specific {{{2
+
 " }}} Polygot {{{3
+" A collection of language packs for Vim.
 Plug 'sheerun/vim-polyglot'  " Syntax Highlighting for many languages
 let g:polyglot_disabled = ['vue']
 
@@ -277,33 +279,39 @@ Plug 'tpope/vim-rhubarb'
 " Plug 'zchee/deoplete-jedi'
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
+" COC {{{3
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
+nnoremap <silent> <leader>l :<C-u>CocList<cr>
+
+
 " Deoplete {{{3
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-let g:deoplete#enable_at_startup = 1
-
-" Setup Icons for deoplete
-function! SetupDeopleteIcons()
-    if v:vim_did_enter
-    else
-        call deoplete#custom#source('around',        'mark', '↻')
-        call deoplete#custom#source('buffer',        'mark', 'ℬ')
-        call deoplete#custom#source('github',        'mark', '')
-        call deoplete#custom#source('jedi',          'mark', '')
-        call deoplete#custom#source('member',        'mark', '.')
-        call deoplete#custom#source('neosnippet',    'mark', '⌘')
-        call deoplete#custom#source('omni',          'mark', '⌾')
-        call deoplete#custom#source('syntax',        'mark', '♯')
-        call deoplete#custom#source('tag',           'mark', '⌦')
-        call deoplete#custom#source('vim',           'mark', '')
-        call deoplete#custom#source('tern',          'mark', '')
-    endif
-endfunction
-
-augroup DeopleteIcons
-    autocmd!
-    autocmd! VimEnter * call SetupDeopleteIcons()
-augroup END
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"
+" let g:deoplete#enable_at_startup = 1
+"
+" " Setup Icons for deoplete
+" function! SetupDeopleteIcons()
+"     if v:vim_did_enter
+"     else
+"         call deoplete#custom#source('around',        'mark', '↻')
+"         call deoplete#custom#source('buffer',        'mark', 'ℬ')
+"         call deoplete#custom#source('github',        'mark', '')
+"         call deoplete#custom#source('jedi',          'mark', '')
+"         call deoplete#custom#source('member',        'mark', '.')
+"         call deoplete#custom#source('neosnippet',    'mark', '⌘')
+"         call deoplete#custom#source('omni',          'mark', '⌾')
+"         call deoplete#custom#source('syntax',        'mark', '♯')
+"         call deoplete#custom#source('tag',           'mark', '⌦')
+"         call deoplete#custom#source('vim',           'mark', '')
+"         call deoplete#custom#source('tern',          'mark', '')
+"     endif
+" endfunction
+"
+" augroup DeopleteIcons
+"     autocmd!
+"     autocmd! VimEnter * call SetupDeopleteIcons()
+" augroup END
 
 " Trying to setup deoplete to use vim-rhubarb or deoplete-github
 " let g:deoplete#omni#functions = {}
@@ -329,34 +337,37 @@ augroup END
 
 
 " LanguageClient-neovim {{{3
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-let g:LanguageClient_selectionUI = "location-list"
-let g:LanguageClient_diagnosticsList = "Location"
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'vue': ['vls'],
-    \ 'python': ['pyls'],
-    \ }
-
-nnoremap <silent> <leader>l :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+"
+" let g:LanguageClient_selectionUI = "location-list"
+" let g:LanguageClient_diagnosticsList = "Location"
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['javascript-typescript-stdio'],
+"     \ 'javascript.jsx': ['javascript-typescript-stdio'],
+"     \ 'vue': ['vls'],
+"     \ 'python': ['pyls'],
+"     \ }
+"
+" nnoremap <silent> <leader>l :call LanguageClient_contextMenu()<CR>
+" nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 "}}}
+
 " }}} Utilisnips {{{3
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 
 " }}} Auto-pairs {{{3
 Plug 'jiangmiao/auto-pairs'
+
 " }}} Vim Snippets {{{3
 Plug 'honza/vim-snippets'
+
 " }}} Supertab {{{3
 Plug 'ervandew/supertab'
 
@@ -372,8 +383,10 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
+
 " }}} Vim Gutentags {{{3
 Plug 'ludovicchabant/vim-gutentags'
+
 " }}} Editorconfig {{{3
 Plug 'editorconfig/editorconfig-vim'
 
@@ -395,39 +408,40 @@ nmap <leader>j :JsDoc<CR>
 " Linting {{{2
 
 " ALE {{{3
-Plug 'w0rp/ale'
-let g:ale_completion_enabled = 1
-
-let g:ale_open_list = 1
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 0
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
-let g:ale_list_window_size = 5
-
-let g:ale_echo_msg_format = '[%severity%][%linter%][%code%] %s '
-let g:ale_echo_msg_error_str = ''
-let g:ale_echo_msg_warning_str = ''
-let g:ale_echo_msg_info_str =  ''
-
-let g:ale_python_flake8_executable = 'python3.6'
-let g:ale_python_flake8_options = '-m flake8'
-let g:ale_python_pylint_executable = 'python3.6'
-let g:ale_python_pylint_options = '-m pylint'
-
-let g:ale_linters = {}
-" Use LanguageClient to handle linting
-" let g:ale_linters.python = ['yapf', 'flake8', 'pylint', 'isort']
-let g:ale_linters.javascript = ['eslint', 'prettier']
-
-let g:ale_fixers = {}
-let g:ale_fixers.python = ['yapf', 'isort']  " Flake8 and pylint throw error?
-let g:ale_fixers.javascript = ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace']
-let g:ale_fixers.vue = ['prettier', 'eslint']
+" Plug 'w0rp/ale'
+" let g:ale_completion_enabled = 1
+"
+" let g:ale_open_list = 1
+" let g:ale_set_loclist = 1
+" let g:ale_set_quickfix = 0
+" let g:ale_sign_error = ''
+" let g:ale_sign_warning = ''
+" let g:ale_list_window_size = 5
+"
+" let g:ale_echo_msg_format = '[%severity%][%linter%][%code%] %s '
+" let g:ale_echo_msg_error_str = ''
+" let g:ale_echo_msg_warning_str = ''
+" let g:ale_echo_msg_info_str =  ''
+"
+" let g:ale_python_flake8_executable = 'python3.6'
+" let g:ale_python_flake8_options = '-m flake8'
+" let g:ale_python_pylint_executable = 'python3.6'
+" let g:ale_python_pylint_options = '-m pylint'
+"
+" let g:ale_linters = {}
+" " Use LanguageClient to handle linting
+" " let g:ale_linters.python = ['yapf', 'flake8', 'pylint', 'isort']
+" let g:ale_linters.javascript = ['eslint', 'prettier']
+"
+" let g:ale_fixers = {}
+" let g:ale_fixers.python = ['yapf', 'isort']  " Flake8 and pylint throw error?
+" let g:ale_fixers.javascript = ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace']
+" let g:ale_fixers.vue = ['prettier', 'eslint']
 
 " Editing {{{2 
 
 " Vim Sandwich {{{3
+" The set of operator and textobject plugins to search/select/edit sandwiched textobjects.
 Plug 'machakann/vim-sandwich'
 
 " Vim Submode {{{3
@@ -459,8 +473,10 @@ Plug 'wellle/targets.vim'
 " Tmux {{{2
 " Tmux Navigator {{{3
 Plug 'christoomey/vim-tmux-navigator'
+
 " }}} Tmux Focus Events {{{3
 Plug 'tmux-plugins/vim-tmux-focus-events'
+
 " }}} Tmux Clipboard {{{3
 Plug 'roxma/vim-tmux-clipboard'
 
