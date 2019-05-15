@@ -1,4 +1,4 @@
-" TODO {{{1
+" INFO {{{1
 
 " Reference {{{2
 
@@ -34,6 +34,7 @@
 
 " }}}
 
+
 " Plugins {{{1
 
 " Command       | Description
@@ -58,60 +59,15 @@ call plug#begin('~/.config/nvim/plugged')
 
 " }}}
 
-
 " User Interface {{{2
-" Plug 'yuttie/comfortable-motion.vim'
+
+" Comfortable Motion {{{3
+" Physics-based smooth scrolling
+Plug 'yuttie/comfortable-motion.vim'
 
 " Lightline {{{3
 " A light and configurable statusline/tabline plugin
 Plug 'itchyny/lightline.vim'
-
-function! LightlineReadonly()
-    return &readonly ? '' : ''
-endfunction
-
-function! LightlineFugitive()
-    if exists('*fugitive#head')
-        let branch = fugitive#head()
-        return branch !=# '' ? ' '.branch : ''
-    endif
-    return ''
-endfunction
-
-function! LightlineGutentags()
-    return gutentags#statusline()
-endfunction
-
-let g:lightline = {
-    \ 'colorscheme': 'jellybeans',
-    \ 'active': {
-    \   'left': [ ['mode', 'paste'],
-    \             ['cocstatus', 'fugitive', 'readonly', 'relativepath', 'modified'] ],
-    \   'right': [ [ 'lineinfo' ], [ 'percent' ], ['filetype'], ['gutentags'] ]
-    \ },
-    \
-    \ 'inactive': {
-    \   'left': [ ['relativepath', 'modified'] ],
-    \   'right': [ ]
-    \ },
-    \
-    \ 'component': {
-    \   'lineinfo': '%3l:%-2v',
-    \ },
-    \
-    \ 'component_function': {
-    \   'readonly': 'LightlineReadonly',
-    \   'fugitive': 'LightlineFugitive',
-    \   'gutentags': 'LightlineGutentags',
-    \   'cocstatus': 'coc#status'
-    \ },
-    \
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
-\ }
-
-" lightline displays mode instead
-set noshowmode
 
 " Jellybeans {{{3
 " A colorful, dark color scheme for Vim
@@ -129,7 +85,6 @@ Plug 'machakann/vim-highlightedyank'
 " Maximizer {{{3
 " Maximizes and restores the current window in Vim
 Plug 'szw/vim-maximizer'
-let g:maximizer_set_default_mapping = 0
 
 " Vim Signature {{{3
 " Plugin to toggle, display and navigate marks
@@ -143,131 +98,53 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/vim-peekaboo'
 
 " Vista {{{3
-" View and search LSP symbols, tags in Vim
+" View and search language server symbols, tags in Vim
 Plug 'liuchengxu/vista.vim'
-let g:vista_default_executive = 'coc'
-
-" Toggle vista tagbar
-nmap <silent> <leader>t :Vista!!<CR>
-
-
-
 
 " }}}
 
 " Language Specific {{{2
 
-" }}} Polygot {{{3
+" Polygot {{{3
 " A collection of language packs for Vim.
 Plug 'sheerun/vim-polyglot'
-let g:polyglot_disabled = ['vue']
 
-" }}} Vue {{{3
+" Vue {{{3
+" Syntax Highlight for Vue.js components
 Plug 'posva/vim-vue'
-let g:vue_disable_pre_processors=1
 
-augroup vue
-    autocmd!
-    autocmd FileType vue syntax sync fromstart
-    autocmd BufNewFile,BufRead *.vue setf vue
 
-    " Deal with losing syntax constantly
-    autocmd FileType vue nnoremap <silent> G :syntax sync fromstart<cr>G
-    autocmd FileType vue nnoremap <silent> <C-d> :syntax sync fromstart<cr><C-d>
-    autocmd FileType vue nnoremap <silent> <C-u> :syntax sync fromstart<cr><C-u>
-
-augroup END
-
-let g:ft = ''
-function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
-    endif
-  endif
-endfunction
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
 
 " }}}
 
 " File Navigation {{{2
+
 " FZF {{{3
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
-" Hide statusline for fzf
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" }}} Ranger {{{3
+" Ranger {{{3
 " Use ranger for file navigation. Requres bclose
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
-" map our own keys
-let g:ranger_map_keys = 0
-
-" Replace netrw
-let g:ranger_replace_netrw = 1
-
-" }}} 
 
 " Git {{{2
-" }}} Fugitive {{{3
+
+" Fugitive {{{3
 Plug 'tpope/vim-fugitive'
 
-" }}} Git Gutter {{{3
+" Git Gutter {{{3
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_sign_added = ''
-let g:gitgutter_sign_modified = ''
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_modified_removed = ''
-set updatetime=100
 
-" }}} Git Gist {{{3
+" Git Gist {{{3
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 
-" }}} Rhubarb {{{3
+" Rhubarb {{{3
 Plug 'tpope/vim-rhubarb'
+
+" }}}
 
 " Completion {{{2
 
@@ -275,11 +152,8 @@ Plug 'tpope/vim-rhubarb'
 " Intellisense engine for vim8 & neovim, full language server protocol support as VSCode
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
-nnoremap <silent> <leader>l :<C-u>CocList<cr>
-
 " Utilisnips {{{3
 Plug 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<tab>"
 
 " Auto-pairs {{{3
 Plug 'jiangmiao/auto-pairs'
@@ -290,18 +164,8 @@ Plug 'honza/vim-snippets'
 " Supertab {{{3
 Plug 'ervandew/supertab'
 
-let g:SuperTabDefaultCompletionType = '<c-n>'
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
-
 " NERD Commenter {{{3
 Plug 'scrooloose/nerdcommenter'
-
-let g:NERDCommentEmptyLines = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDSpaceDelims = 1
-let g:NERDTrimTrailingWhitespace = 1
 
 " Vim Gutentags {{{3
 Plug 'ludovicchabant/vim-gutentags'
@@ -312,17 +176,6 @@ Plug 'editorconfig/editorconfig-vim'
 " JSDoc {{{3
 Plug 'heavenshell/vim-jsdoc'
 
-let g:javascript_plugin_jsdoc = 1
-let g:jsdoc_enable_es6=1
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_param_description_separator=' - '
-let g:jsdoc_user_defined_tags = {
-    \ '@vue-data': 'data',
-    \ '@vue-prop': 'prop',
-    \ '@vue-computed': 'computed',
-    \ }
-nmap <leader>j :JsDoc<CR>
 
 " Linting {{{2
 
@@ -335,24 +188,6 @@ Plug 'machakann/vim-sandwich'
 " Vim Submode {{{3
 Plug 'kana/vim-submode'
 
-let g:submode_always_show_submode = 1
-
-function! SetupSubmodeConfig()
-    call submode#enter_with('window', 'n', '', '<C-r>')
-    call submode#leave_with('window', 'n', '', '<ESC>')
-    call submode#leave_with('window', 'n', '', '<ENTER>')
-    call submode#map('window', 'n', '', 'h', '1<C-w>>')
-    call submode#map('window', 'n', '', 'j', '1<C-w>-')
-    call submode#map('window', 'n', '', 'k', '1<C-w>+')
-    call submode#map('window', 'n', '', 'l', '1<C-w><')
-    call submode#map('window', 'n', '', '\', ':vertical resize 80<CR>')
-endfunction
-
-" Resize Windows
-augroup SubmodeConfig
-    autocmd!
-    autocmd VimEnter * call SetupSubmodeConfig()
-augroup END
 
 " Targets {{{3
 " Vim plugin that provides additional text objects
@@ -371,51 +206,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 
 call plug#end()
-" }}}
-
-" Leader Key {{{1
-let mapleader=','
-
-    " Edit/reload init.vim
-    nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
-    nmap <leader>sv :so $MYVIMRC<CR>
-
-    " Search
-    nmap <silent> <leader>/ :nohlsearch<CR>
-
-    " Search
-    nmap <leader>g :Ag 
-    " Search highlighted text
-    vnoremap <leader>g y:Ag <C-R>"
-
-    " toggle paste
-    nmap <leader>p :set paste! paste?<CR>
-
-    " toggle spell
-    nmap <leader>s :set spell! spell?<CR>
-
-    " open quickfix
-    nmap <leader>q :copen<CR>
-
-    nmap <leader>= :ALEFix<CR>
-
-    " Toggle comments
-    vnoremap <silent> <leader>c :call NERDComment("nx", "invert")<CR>
-
-    " Last Buffer
-    nmap <silent> <esc> :b#<CR>
-
-    " Toggle linting
-    " nmap <leader>l :ALEToggle<CR>
-
-    " Rename
-    " nmap <leader>r :call RopeRename()
-
-    nmap <leader>b :Buffers<CR>
-    nmap <leader>f :GFiles<CR>
-
-    map <leader>nt :Ranger<CR>
-
 " }}}
 
 
@@ -442,9 +232,9 @@ set showmatch
 set mat=2
 
 " Tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab
+" set tabstop=4
+" set shiftwidth=4
+" set expandtab
 
 " Line numbers
 set number
@@ -570,20 +360,300 @@ endif
 " Open vim help in a tab
 cnoreabbrev <expr> help getcmdtype() == ":" && getcmdline() == 'help' ? 'tab help' : 'help'
 
-" Autocommands
+set modelines=1
 
+
+" Leader Key {{{1
+let mapleader=','
+
+    " Edit/reload init.vim
+    nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
+    nmap <leader>sv :so $MYVIMRC<CR>
+
+    " Search
+    nmap <silent> <leader>/ :nohlsearch<CR>
+
+    " Search
+    nmap <leader>g :Ag 
+    " Search highlighted text
+    vnoremap <leader>g y:Ag <C-R>"
+
+    " toggle paste
+    nmap <leader>p :set paste! paste?<CR>
+
+    " toggle spell
+    nmap <leader>s :set spell! spell?<CR>
+
+    " open quickfix
+    nmap <leader>q :copen<CR>
+
+    nmap <leader>= :ALEFix<CR>
+
+    " Toggle comments
+    vnoremap <silent> <leader>c :call NERDComment("nx", "invert")<CR>
+
+    " Last Buffer
+    nmap <silent> <esc> :b#<CR>
+
+    " Toggle linting
+    " nmap <leader>l :ALEToggle<CR>
+
+    " Rename
+    " nmap <leader>r :call RopeRename()
+
+    nmap <leader>b :Buffers<CR>
+    nmap <leader>f :GFiles<CR>
+
+    map <leader>nt :Ranger<CR>
+
+" }}}
+" File Type Specific Settings {{{1
+
+" Vue {{{2
+augroup vue
+    autocmd!
+    autocmd FileType vue syntax sync fromstart
+    autocmd BufNewFile,BufRead *.vue setf vue
+
+    " Deal with losing syntax constantly
+    autocmd FileType vue nnoremap <silent> G :syntax sync fromstart<cr>G
+    autocmd FileType vue nnoremap <silent> <C-d> :syntax sync fromstart<cr><C-d>
+    autocmd FileType vue nnoremap <silent> <C-u> :syntax sync fromstart<cr><C-u>
+augroup END
+
+
+" Javascript {{{2
 augroup javascript_folding
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
     autocmd FileType vue setlocal foldmethod=syntax
 augroup END
 
+
+" Terminal {{{2
 augroup Terminal
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
 
+" }}}1
+" Plugin Specific Settings  {{{1
+
+" COC {{{2
+" Show all diagnostics
+nnoremap <silent> <leader>l :<C-u>CocList<cr>
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ca <Plug>(coc-codeaction)
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 
-set modelines=1
+" Lightline {{{2
+function! LightlineReadonly()
+    return &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+    if exists('*fugitive#head')
+        let branch = fugitive#head()
+        return branch !=# '' ? ' '.branch : ''
+    endif
+    return ''
+endfunction
+
+function! LightlineGutentags()
+    return gutentags#statusline()
+endfunction
+
+let g:lightline = {
+    \ 'colorscheme': 'jellybeans',
+    \ 'active': {
+    \   'left': [ ['mode', 'paste'],
+    \             ['cocstatus', 'fugitive', 'readonly', 'relativepath', 'modified'] ],
+    \   'right': [ [ 'lineinfo' ], [ 'percent' ], ['filetype'], ['gutentags'] ]
+    \ },
+    \
+    \ 'inactive': {
+    \   'left': [ ['relativepath', 'modified'] ],
+    \   'right': [ ]
+    \ },
+    \
+    \ 'component': {
+    \   'lineinfo': '%3l:%-2v',
+    \ },
+    \
+    \ 'component_function': {
+    \   'readonly': 'LightlineReadonly',
+    \   'fugitive': 'LightlineFugitive',
+    \   'gutentags': 'LightlineGutentags',
+    \   'cocstatus': 'coc#status'
+    \ },
+    \
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+\ }
+
+" lightline displays mode instead
+set noshowmode
+
+
+" NERD Commenter {{{2
+let g:NERDCommentEmptyLines = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+
+" Supertab {{{2
+let g:SuperTabDefaultCompletionType = '<c-n>'
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+
+
+" Utilisnips {{{2
+let g:UltiSnipsExpandTrigger="<tab>"
+
+
+" Maximizer {{{2
+let g:maximizer_set_default_mapping = 0
+
+
+" Vista {{{2
+let g:vista_default_executive = 'coc'
+
+" Toggle vista tagbar
+nmap <silent> <leader>t :Vista!!<CR>
+
+
+" Polygot {{{2
+let g:polyglot_disabled = ['vue']
+
+
+" Vue {{{2
+let g:vue_disable_pre_processors=1
+
+" To use NERDCommenter with Vue files, you can use its "hooks" feature to temporarily change the filetype.
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
+
+
+" FZF {{{3
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Hide statusline for fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+
+" Ranger {{{2
+" map our own keys
+let g:ranger_map_keys = 0
+
+" Replace netrw
+let g:ranger_replace_netrw = 1
+
+
+" Git Gutter {{{2
+let g:gitgutter_sign_added = ''
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_modified_removed = ''
+set updatetime=100
+
+
+" JSDoc {{{2
+let g:javascript_plugin_jsdoc = 1
+let g:jsdoc_enable_es6=1
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_input_description=1
+let g:jsdoc_param_description_separator=' - '
+let g:jsdoc_user_defined_tags = {
+    \ '@vue-data': 'data',
+    \ '@vue-prop': 'prop',
+    \ '@vue-computed': 'computed',
+    \ }
+nmap <leader>j :JsDoc<CR>
+
+
+" Vim Submode {{{2
+let g:submode_always_show_submode = 1
+
+function! SetupSubmodeConfig()
+    call submode#enter_with('window', 'n', '', '<C-r>')
+    call submode#leave_with('window', 'n', '', '<ESC>')
+    call submode#leave_with('window', 'n', '', '<ENTER>')
+    call submode#map('window', 'n', '', 'h', '1<C-w>>')
+    call submode#map('window', 'n', '', 'j', '1<C-w>-')
+    call submode#map('window', 'n', '', 'k', '1<C-w>+')
+    call submode#map('window', 'n', '', 'l', '1<C-w><')
+    call submode#map('window', 'n', '', '\', ':vertical resize 80<CR>')
+endfunction
+
+" Resize Windows
+augroup SubmodeConfig
+    autocmd!
+    autocmd VimEnter * call SetupSubmodeConfig()
+augroup END
+
+
+
+
+
 " vim:foldmethod=marker:foldlevel=0
