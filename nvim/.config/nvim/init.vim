@@ -1,4 +1,4 @@
-" INFO {{{1
+"   INFO {{{1
 
 " Reference {{{2
 
@@ -35,7 +35,7 @@
 " }}}
 
 
-" Plugins {{{1
+" ﭧ  Plugins {{{1
 
 " Command       | Description
 " ------------- | ------------
@@ -100,6 +100,7 @@ Plug 'junegunn/vim-peekaboo'
 " Vista {{{3
 " View and search language server symbols, tags in Vim
 Plug 'liuchengxu/vista.vim'
+
 
 " }}}
 
@@ -209,7 +210,7 @@ call plug#end()
 " }}}
 
 
-" General Settings {{{1
+"   General Settings {{{1
 set encoding=utf8
 set termencoding=utf-8
 set laststatus=2
@@ -350,20 +351,27 @@ if (has("termguicolors"))
 endif
 
 
-
-
-
-
-
-
-
 " Open vim help in a tab
 cnoreabbrev <expr> help getcmdtype() == ":" && getcmdline() == 'help' ? 'tab help' : 'help'
 
 set modelines=1
 
 
-" Leader Key {{{1
+function! FoldTextVimrc()
+    " Make this file look pretty when folded
+    let decoration = ''
+    let txt = getline(v:foldstart)
+    let txtCleanParen = substitute(txt, '"', '', '')
+    let txtCleanLevel = substitute(txtCleanParen, '\s{{{.', '', '')
+
+    if v:foldlevel > 1
+	return decoration . txtCleanLevel
+    else
+	return txtCleanLevel
+    endif
+endfunction
+
+" 炙 Leader Key {{{1
 let mapleader=','
 
     " Edit/reload init.vim
@@ -407,7 +415,7 @@ let mapleader=','
     map <leader>nt :Ranger<CR>
 
 " }}}
-" File Type Specific Settings {{{1
+"   File Type Specific Settings {{{1
 
 " Vue {{{2
 augroup vue
@@ -437,7 +445,7 @@ augroup Terminal
 augroup END
 
 " }}}1
-" Plugin Specific Settings  {{{1
+"   Plugin Specific Settings {{{1
 
 " COC {{{2
 " Show all diagnostics
@@ -653,7 +661,4 @@ augroup SubmodeConfig
 augroup END
 
 
-
-
-
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:foldlevel=0:foldtext=FoldTextVimrc()
