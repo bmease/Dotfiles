@@ -7,6 +7,12 @@
 "  http://learnvimscriptthehardway.stevelosh.com/
 "  https://dougblack.io/words/a-good-vimrc.html
 
+" Reference floating windows {{{2
+
+"  https://www.reddit.com/r/neovim/comments/djmehv/im_probably_really_late_to_the_party_but_fzf_in_a/
+"  https://www.reddit.com/r/neovim/comments/di41cm/a_floating_terminal_with_borderpadding/
+"  https://www.reddit.com/r/neovim/comments/dggh28/plugin_that_utilizes_floating_windows/
+
 
 " Reference .vimrc {{{2
 
@@ -60,6 +66,7 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " User Interface {{{2
+Plug 'guns/xterm-color-table.vim'
 
 " Comfortable Motion {{{3
 " Physics-based smooth scrolling
@@ -154,7 +161,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " Utilisnips {{{3
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " Auto-pairs {{{3
 Plug 'jiangmiao/auto-pairs'
@@ -163,7 +170,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
 
 " Supertab {{{3
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 
 " NERD Commenter {{{3
 Plug 'scrooloose/nerdcommenter'
@@ -193,6 +200,11 @@ Plug 'kana/vim-submode'
 " Targets {{{3
 " Vim plugin that provides additional text objects
 Plug 'wellle/targets.vim'
+
+" Quickfix Reflector {{{3
+" Change code right in the quickfix window
+Plug 'stefandtw/quickfix-reflector.vim'
+
 
 
 " Tmux {{{2
@@ -259,7 +271,6 @@ vnoremap > >gv
 set colorcolumn=79
 
 " Don't highlight past 128 characters
-" For speed
 set synmaxcol=128
 
 
@@ -329,26 +340,36 @@ vnoremap s :!sort<CR>
 
 " Add function to determine if it's a single line and then break it into
 " multiple lines for sorting: `:!tr , "\n" | sort | tr "\n" ,`
+" vnoremap <leader>fnl :!tr ' ' '\n'
+" vnoremap <leader>fsl :!tr ' ' '\n' \| sort \| tr '\n' ' '
+
 
 " Increase redraw time so we don't lose syntax highlighting
 set redrawtime=10000
 
 set background=dark
+
+" Jellybeans
+
 colorscheme jellybeans
 highlight Comment cterm=italic
+let g:jellybeans_use_term_italics = 1
+let g:jellybeans_overrides = {
+\    'background': { 'guibg': '000000' },
+\}
 
 
 " Setup 24-bit True Color
-if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-" For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-    set termguicolors
-endif
+" if (has("nvim"))
+"     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" endif
+" " For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+" "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+" if (has("termguicolors"))
+"     set termguicolors
+" endif
 
 
 " Open vim help in a tab
@@ -383,8 +404,12 @@ let mapleader=','
 
     " Search
     nmap <leader>g :Ag 
+
     " Search highlighted text
     vnoremap <leader>g y:Ag <C-R>"
+
+    " Search highlighted text immediately
+    xnoremap <nowait> g y:Ag <C-R>"<CR>
 
     " toggle paste
     nmap <leader>p :set paste! paste?<CR>
@@ -406,11 +431,10 @@ let mapleader=','
     " Toggle linting
     " nmap <leader>l :ALEToggle<CR>
 
-    " Rename
-    " nmap <leader>r :call RopeRename()
-
     nmap <leader>b :Buffers<CR>
-    nmap <leader>f :GFiles<CR>
+
+    " Search Git files including staged
+    nmap <leader>f :GFiles --exclude-standard --cached --others<CR>
 
     map <leader>nt :Ranger<CR>
 
@@ -457,16 +481,43 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
+" Format visual selection
+xmap <leader>= <Plug>(coc-format-selected)
+
+" Format whole buffer
+nmap <leader>= <Plug>(coc-format)
 
 " Remap for do codeAction of current line
-nmap <leader>ca <Plug>(coc-codeaction)
+nmap <leader>a <Plug>(coc-codeaction)
 
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" Use <Tab> and <S-Tab> to navigate the completion list:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use <cr> to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" To make <cr> select the first completion item and confirm the completion when no item has been selected:
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+" Close the preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" set signcolumn=auto:2
 
 " Lightline {{{2
 function! LightlineReadonly()
@@ -513,8 +564,12 @@ let g:lightline = {
     \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+" force lightline update if coc status changes.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 " lightline displays mode instead
 set noshowmode
+
 
 
 " NERD Commenter {{{2
@@ -576,6 +631,33 @@ endfunction
 
 
 " FZF {{{3
+" let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
+"
+let $FZF_DEFAULT_OPTS='--margin=1,2 --layout=reverse'
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = float2nr(20)
+  let width = float2nr(80)
+  let horizontal = float2nr((&columns - width) / 2)
+  let vertical = 10
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -659,6 +741,5 @@ augroup SubmodeConfig
     autocmd!
     autocmd VimEnter * call SetupSubmodeConfig()
 augroup END
-
 
 " vim:foldmethod=marker:foldlevel=0:foldtext=FoldTextVimrc()
