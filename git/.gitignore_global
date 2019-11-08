@@ -1,3 +1,4 @@
 tags
 tags.*
 .tern-port
+.mypy_cache
