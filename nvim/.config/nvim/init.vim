@@ -376,22 +376,12 @@ let g:jellybeans_overrides = {
 " Open vim help in a tab
 cnoreabbrev <expr> help getcmdtype() == ":" && getcmdline() == 'help' ? 'tab help' : 'help'
 
+" Check last line for modeline
 set modelines=1
 
+" Allow modeline expressions
+set modelineexpr
 
-function! FoldTextVimrc()
-    " Make this file look pretty when folded
-    let decoration = ''
-    let txt = getline(v:foldstart)
-    let txtCleanParen = substitute(txt, '"', '', '')
-    let txtCleanLevel = substitute(txtCleanParen, '\s{{{.', '', '')
-
-    if v:foldlevel > 1
-	return decoration . txtCleanLevel
-    else
-	return txtCleanLevel
-    endif
-endfunction
 
 " 炙 Leader Key {{{1
 let mapleader=','
@@ -742,5 +732,20 @@ augroup SubmodeConfig
     autocmd!
     autocmd VimEnter * call SetupSubmodeConfig()
 augroup END
+
+function! FoldTextVimrc()
+    " Make this file look pretty when folded
+    let decoration = ''
+    let txt = getline(v:foldstart)
+    let txtCleanParen = substitute(txt, '"', '', '')
+    let txtCleanLevel = substitute(txtCleanParen, '\s{{{.', '', '')
+
+    if v:foldlevel > 1
+	return decoration . txtCleanLevel
+    else
+	return txtCleanLevel
+    endif
+endfunction
+
 
 " vim:foldmethod=marker:foldlevel=0:foldtext=FoldTextVimrc()
