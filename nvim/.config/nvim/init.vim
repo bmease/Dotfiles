@@ -158,7 +158,8 @@ Plug 'tpope/vim-rhubarb'
 
 " COC {{{3
 " Intellisense engine for vim8 & neovim, full language server protocol support as VSCode
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " Utilisnips {{{3
 " Plug 'SirVer/ultisnips'
