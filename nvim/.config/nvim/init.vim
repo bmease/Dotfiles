@@ -20,6 +20,7 @@
 "  https://dougblack.io/words/a-good-vimrc.html
 "  https://github.com/romainl/idiomatic-vimrc/
 
+
 " Reference floating windows {{{2
 
 "  https://www.reddit.com/r/neovim/comments/djmehv/im_probably_really_late_to_the_party_but_fzf_in_a/
@@ -52,7 +53,6 @@
 "  https://wakatime.com/
 
 " }}}
-
 
 " ﭧ  Plugins {{{1
 
@@ -149,6 +149,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
+" }}}
 
 " Git {{{2
 
@@ -198,8 +199,7 @@ Plug 'editorconfig/editorconfig-vim'
 " JSDoc {{{3
 Plug 'heavenshell/vim-jsdoc'
 
-
-" Linting {{{2
+" }}}
 
 " Editing {{{2 
 
@@ -224,21 +224,22 @@ Plug 'stefandtw/quickfix-reflector.vim'
 " NOTE: gS to split lines, gJ to join lines. (change to use leader?)
 Plug 'AndrewRadev/splitjoin.vim'
 
+" }}}
 
 " Tmux {{{2
 " Tmux Navigator {{{3
 " NOTE: might not need this?
 Plug 'christoomey/vim-tmux-navigator'
 
-" }}} Tmux Focus Events {{{3
+" Tmux Focus Events {{{3
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" }}} Tmux Clipboard {{{3
+" Tmux Clipboard {{{3
 Plug 'roxma/vim-tmux-clipboard'
+" }}}
 
 call plug#end()
 " }}}
-
 
 "   General Settings {{{1
 set encoding=utf8
@@ -463,7 +464,7 @@ augroup Terminal
     autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
 
-" }}}1
+
 "   Plugin Specific Settings {{{1
 
 " COC {{{2
@@ -737,15 +738,20 @@ augroup SubmodeConfig
     autocmd VimEnter * call SetupSubmodeConfig()
 augroup END
 
+" }}}
+
 function! FoldTextVimrc()
     " Make this file look pretty when folded
-    let decoration = ''
     let txt = getline(v:foldstart)
     let txtCleanParen = substitute(txt, '"', '', '')
     let txtCleanLevel = substitute(txtCleanParen, '\s{{{.', '', '')
 
-    if v:foldlevel > 1
-	return decoration . txtCleanLevel
+    if v:foldlevel == 1
+	return txtCleanLevel  " Top level has emojis
+    elseif v:foldlevel == 2
+	return '   ' . txtCleanLevel
+    elseif v:foldlevel == 3
+	return '   ▪ ' . txtCleanLevel
     else
 	return txtCleanLevel
     endif
