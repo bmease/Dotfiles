@@ -206,6 +206,10 @@ Plug 'wellle/targets.vim'
 " Change code right in the quickfix window
 Plug 'stefandtw/quickfix-reflector.vim'
 
+" Splitjoin {{{3
+" A vim plugin that simplifies the transition between multiline and single-line code
+" NOTE: gS to split lines, gJ to join lines. (change to use leader?)
+Plug 'AndrewRadev/splitjoin.vim'
 
 
 " Tmux {{{2
