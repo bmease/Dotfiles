@@ -1,3 +1,15 @@
+
+
+" ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+" ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+" ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+" ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+" ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+" ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+
+" Bradley's Neovim configuration
+
+
 "   INFO {{{1
 
 " Reference {{{2
@@ -6,6 +18,7 @@
 "  https://github.com/akrawchyk/awesome-vim
 "  http://learnvimscriptthehardway.stevelosh.com/
 "  https://dougblack.io/words/a-good-vimrc.html
+"  https://github.com/romainl/idiomatic-vimrc/
 
 " Reference floating windows {{{2
 
