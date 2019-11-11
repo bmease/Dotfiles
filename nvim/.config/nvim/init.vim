@@ -43,6 +43,9 @@
 "  https://github.com/othree/jspc.vim
 "  https://github.com/janko-m/vim-test
 "  https://github.com/stylelint/stylelint
+"  https://github.com/liuchengxu/vim-clap
+"  https://github.com/vimwiki/vimwiki
+"  https://github.com/rhysd/git-messenger.vim
 "
 "  https://github.com/junegunn/vim-peekaboo
 "  https://github.com/tomtom/quickfixsigns_vim
@@ -120,6 +123,10 @@ Plug 'junegunn/vim-peekaboo'
 " Vista {{{3
 " View and search language server symbols, tags in Vim
 Plug 'liuchengxu/vista.vim'
+
+" Vim Which Key {{{3
+" Vim plugin that shows keybindings in popup
+Plug 'liuchengxu/vim-which-key'
 
 
 " }}}
@@ -392,14 +399,14 @@ set modelineexpr
 let mapleader=','
 
     " Edit/reload init.vim
-    nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
-    nmap <leader>sv :so $MYVIMRC<CR>
+    " nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
+    " nmap <leader>sv :so $MYVIMRC<CR>
 
     " Search
-    nmap <silent> <leader>/ :nohlsearch<CR>
+    " nmap <silent> <leader>/ :nohlsearch<CR>
 
     " Search
-    nmap <leader>g :Ag 
+    " nmap <leader>g :Ag
 
     " Search highlighted text
     vnoremap <leader>g y:Ag <C-R>"
@@ -408,13 +415,13 @@ let mapleader=','
     xnoremap <nowait> g y:Ag <C-R>"<CR>
 
     " toggle paste
-    nmap <leader>p :set paste! paste?<CR>
+    " nmap <leader>p :set paste! paste?<CR>
 
     " toggle spell
-    nmap <leader>s :set spell! spell?<CR>
+    " nmap <leader>s :set spell! spell?<CR>
 
     " open quickfix
-    nmap <leader>q :copen<CR>
+    " nmap <leader>q :copen<CR>
 
     nmap <leader>= :ALEFix<CR>
 
@@ -427,12 +434,12 @@ let mapleader=','
     " Toggle linting
     " nmap <leader>l :ALEToggle<CR>
 
-    nmap <leader>b :Buffers<CR>
+    " nmap <leader>b :Buffers<CR>
 
     " Search Git files including staged
-    nmap <leader>f :GFiles --exclude-standard --cached --others<CR>
+    " nmap <leader>f :GFiles --exclude-standard --cached --others<CR>
 
-    map <leader>nt :Ranger<CR>
+    " map <leader>nt :Ranger<CR>
 
 " }}}
 "   File Type Specific Settings {{{1
@@ -575,6 +582,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 
+" bClose {{{2
+" Remove bclose key bindings
+let g:bclose_no_plugin_maps = 1
+
 
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = '<c-n>'
@@ -594,7 +605,7 @@ let g:maximizer_set_default_mapping = 0
 let g:vista_default_executive = 'coc'
 
 " Toggle vista tagbar
-nmap <silent> <leader>t :Vista!!<CR>
+" nmap <silent> <leader>t :Vista!!<CR>
 
 
 " Polygot {{{2
@@ -737,6 +748,68 @@ augroup SubmodeConfig
     autocmd!
     autocmd VimEnter * call SetupSubmodeConfig()
 augroup END
+
+" Vim Which Key {{{2
+
+" Display whichkey for the leader key
+nnoremap <silent> <leader> :<c-u>WhichKey  ','<CR>
+
+" Display which key if no keypress after 500ms
+set timeoutlen=500
+
+" Reference key mappings
+" https://github.com/compilercomplied/dotfiles/blob/0dc674ddc24dd0723e6e38c919594a048ed5d2af/.vim/settings/rich/whichkey.vim
+" https://github.com/LinArcX/VoidConf/blob/7568bf3d99228153ab12fc259a19b903e5612751/home/.config/nvim/plugin/which_key.vim
+" https://github.com/ChristianChiarulli/nvim/blob/8b11502fd63742e0b57db15d3ab45c5f35f485e4/modules/vim-which-key.vim
+
+" Which key mappings
+let g:which_key_map =  {
+  \ 'name': '<leader>',
+  \ '/': [':set hlsearch!', 'toggle-search-results'],
+  \ 'p': [':set paste!', 'toggle-paste'],
+  \ 's': [':set spell!', 'toggle-spell-check'],
+  \
+  \ 'o': {
+    \ 'name': '+open',
+    \ 'g': [':Ag', 'open-file-by-search'],
+    \ 'f': [':GFiles --exclude-standard --cached --others', 'open-file-by-name'],
+    \ 'n': [':Ranger', 'open-file-by-browse'],
+    \ 'q': [':copen', 'open-quick-fix'],
+    \ 'l': [':lopen', 'open-location-list'],
+    \ 'b': [':Buffers', 'open-buffers'],
+    \ 't': [':Vista!!', 'open-tagbar'],
+  \ },
+  \
+  \ 'v': {
+    \ 'name': '+vimrc',
+    \ 'e': [':e $MYVIMRC', 'vimrc-edit'],
+    \ 's': [':so $MYVIMRC', 'vimrc-source']
+  \},
+  \
+  \ 'G': {
+    \ 'name': '+git',
+    \ 's': [':Gstatus', 'git-status'],
+    \ 'b': [':Gblame', 'git-blame']
+  \ },
+  \
+  \ 'P': {
+      \ 'name' : '+plugins',
+      \ 'i' : [ 'PlugInstall', 'plug-install' ],
+      \ 'u' : [ 'PlugUpdate' , 'plug-update'  ],
+      \ 'c' : [ 'PlugClean'  , 'plug-clean'   ],
+      \ 'U' : [ 'PlugUpgrade', 'plug-upgrade' ],
+      \ 's' : [ 'PlugStatus' , 'plug-status'  ],
+  \ }
+\ }
+
+call which_key#register(',', "g:which_key_map")
+
+augroup WhichKey
+  autocmd! FileType which_key
+  autocmd  FileType which_key set laststatus=0 noshowmode noruler synmaxcol=3000
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
+
 
 " }}}
 
