@@ -551,12 +551,20 @@ function! LightlineGutentags()
     return gutentags#statusline()
 endfunction
 
+function! LightlineLineInfo()
+    return winwidth(0) > 70 ? printf('%d:%-2d', line('.'), col('.')) : ''
+endfunction
+
+function! LightlineFiletype()
+    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
 let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
     \             ['cocstatus', 'fugitive', 'readonly', 'relativepath', 'modified'] ],
-    \   'right': [ [ 'lineinfo' ], [ 'percent' ], ['filetype'], ['gutentags'] ]
+    \   'right': [ [ 'lineinfo' ], ['filetype'], ['gutentags'] ]
     \ },
     \
     \ 'inactive': {
@@ -564,15 +572,13 @@ let g:lightline = {
     \   'right': [ ]
     \ },
     \
-    \ 'component': {
-    \   'lineinfo': '%3l:%-2v',
-    \ },
-    \
     \ 'component_function': {
     \   'readonly': 'LightlineReadonly',
     \   'fugitive': 'LightlineFugitive',
     \   'gutentags': 'LightlineGutentags',
-    \   'cocstatus': 'coc#status'
+    \   'cocstatus': 'coc#status',
+    \   'lineinfo': 'LightlineLineInfo',
+    \   'filetype': 'LightlineFiletype',
     \ },
     \
     \ 'separator': { 'left': '', 'right': '' },
