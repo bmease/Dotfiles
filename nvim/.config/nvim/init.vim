@@ -375,15 +375,27 @@ set redrawtime=10000
 
 set background=dark
 
+" Enable 24bit RGB color in the terminal
+set termguicolors
+
+" Vsplit character
+set fillchars=vert:┃
+
+" Fold character
+set fillchars+=fold:·
+
 " Jellybeans
 
-colorscheme jellybeans
-highlight Comment cterm=italic
+" Use italics in the terminal
 let g:jellybeans_use_term_italics = 1
+
+" Override settings
 let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
+\    'background': { 'guibg': '151515' },
+\    'VertSplit': { 'guifg': '666666', 'guibg': '151515' },
 \}
 
+colorscheme jellybeans
 
 " Open vim help in a tab
 cnoreabbrev <expr> help getcmdtype() == ":" && getcmdline() == 'help' ? 'tab help' : 'help'
