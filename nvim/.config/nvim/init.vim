@@ -46,6 +46,10 @@
 "  https://github.com/liuchengxu/vim-clap
 "  https://github.com/vimwiki/vimwiki
 "  https://github.com/rhysd/git-messenger.vim
+"  https://github.com/kana/vim-textobj-user
+"  Float preview Plug 'ncm2/float-preview.nvim' can it work with coc?
+"  https://github.com/kkoomen/vim-doge
+"  https://github.com/haya14busa/incsearch.vim
 "
 "  https://github.com/junegunn/vim-peekaboo
 "  https://github.com/tomtom/quickfixsigns_vim
