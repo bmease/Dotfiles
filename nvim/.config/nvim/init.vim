@@ -113,6 +113,10 @@ Plug 'machakann/vim-highlightedyank'
 " Maximizes and restores the current window in Vim
 Plug 'szw/vim-maximizer'
 
+" Vim Cool {{{3
+" Disable search highlight automatically
+Plug 'romainl/vim-cool'
+
 " Vim Signature {{{3
 " Plugin to toggle, display and navigate marks
 Plug 'kshenoy/vim-signature'
