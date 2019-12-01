@@ -488,6 +488,12 @@ augroup Terminal
     autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
 
+" Git {{{2
+augroup Git
+    autocmd!
+    autocmd FileType gitcommit setlocal spell
+augroup END
+
 
 "   Plugin Specific Settings {{{1
 
