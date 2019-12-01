@@ -182,9 +182,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
-" Utilisnips {{{3
-" Plug 'SirVer/ultisnips'
-
 " Auto-pairs {{{3
 Plug 'jiangmiao/auto-pairs'
 
@@ -611,8 +608,6 @@ let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 
 
-" Utilisnips {{{2
-let g:UltiSnipsExpandTrigger="<tab>"
 
 
 " Maximizer {{{2
