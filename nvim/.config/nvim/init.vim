@@ -59,6 +59,12 @@
 "  https://github.com/terryma/vim-expand-region
 "  https://wakatime.com/
 
+" Ideas {{{2
+" - Animate createFloatingWindow to ease-in/ease-out when opening closing
+
+" Todo {{{2
+" - Add `mouse` options
+
 " }}}
 
 " ﭧ  Plugins {{{1
