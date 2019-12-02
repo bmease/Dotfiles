@@ -498,6 +498,43 @@ augroup END
 "   Plugin Specific Settings {{{1
 
 " COC {{{2
+
+" Coc extensions to consider:
+" https://www.npmjs.com/package/coc-template
+" https://github.com/neoclide/coc-git
+" https://www.npmjs.com/package/coc-webpack
+" https://www.npmjs.com/package/coc-bookmark
+
+    " \ 'coc-css',  " CSS(SASS) language extension
+    " \ 'coc-emoji',  " Adds emoji to completion sources
+    " \ 'coc-eslint',  " ESlint for linting javascript
+    " \ 'coc-highlight', " Provide default highlight for coc.nvim, including document highlight (highlight of current document symbol) and colors highlight.
+    " \ 'coc-html',  " Html language extension
+    " \ 'coc-json',  " Json language extension
+    " \ 'coc-prettier',  " format your JavaScript / TypeScript / CSS / JSON using Prettier
+    " \ 'coc-pyright',  " Pyright, type hint information for python
+    " \ 'coc-python',  " Python language extension
+    " \ 'coc-tsserver',  " Typescript(javascript) language extension
+    " \ 'coc-vetur',  " Vue language extension
+    " \ 'coc-yaml',  " YAML language extension
+    " \ 'coc-snippets',  " Snippets
+
+let g:coc_global_extensions = [
+    \ 'coc-css',
+    \ 'coc-emoji',
+    \ 'coc-eslint',
+    \ 'coc-highlight',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-prettier',
+    \ 'coc-pyright',
+    \ 'coc-python',
+    \ 'coc-tsserver',
+    \ 'coc-vetur',
+    \ 'coc-yaml',
+    \ 'coc-snippets',
+\ ]
+
 " Show all diagnostics
 nnoremap <silent> <leader>l :<C-u>CocList<cr>
 
