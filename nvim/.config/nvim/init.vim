@@ -236,6 +236,11 @@ Plug 'stefandtw/quickfix-reflector.vim'
 " NOTE: gS to split lines, gJ to join lines. (change to use leader?)
 Plug 'AndrewRadev/splitjoin.vim'
 
+" Easy Align {{{3
+" A Vim alignment plugin
+Plug 'junegunn/vim-easy-align'
+
+
 " }}}
 
 " Tmux {{{2
@@ -299,7 +304,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Highlight long lines
-set colorcolumn=79
+" set colorcolumn=79
 
 " Don't highlight past 128 characters
 set synmaxcol=128
@@ -440,7 +445,7 @@ let mapleader=','
     " open quickfix
     " nmap <leader>q :copen<CR>
 
-    nmap <leader>= :ALEFix<CR>
+    " nmap <leader>= :ALEFix<CR>
 
     " Toggle comments
     vnoremap <silent> <leader>c :call NERDComment("nx", "invert")<CR>
@@ -536,25 +541,25 @@ let g:coc_global_extensions = [
 \ ]
 
 " Show all diagnostics
-nnoremap <silent> <leader>l :<C-u>CocList<cr>
+" nnoremap <silent> <leader>l :<C-u>CocList<cr>
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Format visual selection
-xmap <leader>= <Plug>(coc-format-selected)
+" xmap <leader>= <Plug>(coc-format-selected)
 
 " Format whole buffer
-nmap <leader>= <Plug>(coc-format)
+" nmap <leader>= <Plug>(coc-format)
 
 " Remap for do codeAction of current line
-nmap <leader>a <Plug>(coc-codeaction)
+" nmap <leader>a <Plug>(coc-codeaction)
 
 " Fix autofix problem of current line
-nmap <leader>qf <Plug>(coc-fix-current)
+" nmap <leader>qf <Plug>(coc-fix-current)
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -580,7 +585,19 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 " Close the preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+" Echo signature help of current function
+autocmd! User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
 " set signcolumn=auto:2
+
+" Editorconfig {{{2
+let g:EditorConfig_max_line_indicator = 'line'
 
 " Lightline {{{2
 function! LightlineReadonly()
@@ -599,6 +616,7 @@ function! LightlineGutentags()
     return gutentags#statusline()
 endfunction
 
+" TODO: Should check the length the filename and shorten if that is long?
 function! LightlineLineInfo()
     return winwidth(0) > 70 ? printf('%d:%-2d', line('.'), col('.')) : ''
 endfunction
@@ -730,17 +748,23 @@ endfunction
 " Filetypes	File types
 
 " let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
-"
 let $FZF_DEFAULT_OPTS='--margin=1,2 --layout=reverse'
 
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')
+  
+  " Height of the window
+  let height = &lines - 3
 
-  let height = float2nr(20)
-  let width = float2nr(80)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = 10
+  " Width of the window
+  let width = float2nr(&columns - (&columns * 2 / 10))
+
+  " Horizontal offset in rows
+  let horizontal = float2nr((&columns - width) / 2) 
+
+  " Vertical offset in rows
+  let vertical = 2
 
   let opts = {
         \ 'relative': 'editor',
@@ -844,9 +868,13 @@ augroup END
 
 " Display whichkey for the leader key
 nnoremap <silent> <leader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual ','<CR>
 
 " Display which key if no keypress after 500ms
 set timeoutlen=500
+
+" Use floating window
+let g:which_key_use_floating_win = 1
 
 " Reference key mappings
 " https://github.com/compilercomplied/dotfiles/blob/0dc674ddc24dd0723e6e38c919594a048ed5d2af/.vim/settings/rich/whichkey.vim
@@ -856,31 +884,64 @@ set timeoutlen=500
 " Which key mappings
 let g:which_key_map =  {
   \ 'name': '<leader>',
-  \ '/': [':set hlsearch!', 'toggle-search-results'],
   \ 'p': [':set paste!', 'toggle-paste'],
-  \ 's': [':set spell!', 'toggle-spell-check'],
+  \ 's': [':set spell! |:set spell?', 'toggle-spell-check'],
   \
+  \ 'f': {
+    \ 'name': '+format',
+    \ 'a': {
+      \ 'name': '+align',
+      \ 'a': ['<Plug>(EasyAlign)', 'align-interactive'],
+      \ ':': [":'<,'>EasyAlign:>l1", 'align-around-colon'],
+      \ '=': [":'<,'>EasyAlign=", 'align-around-colon']
+    \ },
+  \ },
+  \
+  \ 'l': {
+    \ 'name': '+language-server',
+    \ '=': ['<Plug>(coc-format)', 'format-buffer'],
+    \ 'a': ['<Plug>(coc-codeaction)', 'code-action'],
+    \ 'l': [':CocList', 'coc-list'],
+    \ 'r': ['<Plug>(coc-rename)', 'rename-symbol'],
+    \ 'q': ['<Plug>(coc-fix-current)', 'quickfix-current-line'],
+    \ 'g': {
+      \ 'name': '+goto',
+      \ 'd': ['<Plug>(coc-definition)', 'definition'],
+      \ 't': ['<Plug>(coc-type-definition)', 'type-definition'],
+      \ 'r': ['<Plug>(coc-references)', 'references'],
+      \ 'i': ['<Plug>(coc-implementation)', 'implementation'],
+    \ },
+    \ 'C': [':CocConfig', 'open-coc-config'],
+    \ 'R': [':CocRestart', 'restart-coc'],
+    \ 'I': [':CocInfo', 'show-coc-info'],
+  \ },
   \ 'o': {
     \ 'name': '+open',
-    \ 'g': [':Ag', 'open-file-by-search'],
+    \ 'g': [':Ag', 'open-file-by-grep'],
     \ 'f': [':GFiles --exclude-standard --cached --others', 'open-file-by-name'],
     \ 'n': [':Ranger', 'open-file-by-browse'],
     \ 'q': [':copen', 'open-quick-fix'],
     \ 'l': [':lopen', 'open-location-list'],
     \ 'b': [':Buffers', 'open-buffers'],
     \ 't': [':Vista!!', 'open-tagbar'],
+    \ 'h': [':Helptags', 'search-help-tags'],
   \ },
   \
   \ 'v': {
     \ 'name': '+vimrc',
     \ 'e': [':e $MYVIMRC', 'vimrc-edit'],
-    \ 's': [':so $MYVIMRC', 'vimrc-source']
+    \ 's': [':so $MYVIMRC | echo ".vimrc sourced"', 'vimrc-source'],
   \},
   \
-  \ 'G': {
+  \ 'g': {
     \ 'name': '+git',
     \ 's': [':Gstatus', 'git-status'],
-    \ 'b': [':Gblame', 'git-blame']
+    \ 'b': [':Gblame', 'git-blame'],
+    \ 'c': [':Gcommit', 'git-commit'],
+    \ 'l': [':Glog', 'git-log'],
+    \ 'A': [':Gcommit --amend', 'git-commit--amend'],
+    \ 'B': [':BCommits', 'search-buffer-git-commits'],
+    \ 'C': [':Commits', 'search-git-commits']
   \ },
   \
   \ 'P': {
@@ -890,7 +951,12 @@ let g:which_key_map =  {
       \ 'c' : [ 'PlugClean'  , 'plug-clean'   ],
       \ 'U' : [ 'PlugUpgrade', 'plug-upgrade' ],
       \ 's' : [ 'PlugStatus' , 'plug-status'  ],
-  \ }
+  \ },
+  \ 'S': {
+      \ 'name' : '+snippets',
+      \ 'e' : [ ':CocCommand snippets.editSnippets', 'edit-snippet-filetype' ],
+      \ 'l' : [ ':CocList snippets' , 'list-snippets'  ],
+  \ },
 \ }
 
 call which_key#register(',', "g:which_key_map")
