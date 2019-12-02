@@ -701,7 +701,34 @@ function! NERDCommenter_after()
 endfunction
 
 
-" FZF {{{3
+" FZF {{{2
+
+" Available Commands:
+" Files [PATH]	Files (similar to :FZF)
+" GFiles [OPTS]	Git files (git ls-files)
+" GFiles?	Git files (git status)
+" Buffers	Open buffers
+" Colors	Color schemes
+" Ag [PATTERN]	ag search result (ALT-A to select all, ALT-D to deselect all)
+" Rg [PATTERN]	rg search result (ALT-A to select all, ALT-D to deselect all)
+" Lines [QUERY]	Lines in loaded buffers
+" BLines [QUERY]	Lines in the current buffer
+" Tags [QUERY]	Tags in the project (ctags -R)
+" BTags [QUERY]	Tags in the current buffer
+" Marks	Marks
+" Windows	Windows
+" Locate PATTERN	locate command output
+" History	v:oldfiles and open buffers
+" History:	Command history
+" History/	Search history
+" Snippets	Snippets (UltiSnips)
+" Commits	Git commits (requires fugitive.vim)
+" BCommits	Git commits for the current buffer
+" Commands	Commands
+" Maps	Normal mode mappings
+" Helptags	Help tags 1
+" Filetypes	File types
+
 " let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
 "
 let $FZF_DEFAULT_OPTS='--margin=1,2 --layout=reverse'
