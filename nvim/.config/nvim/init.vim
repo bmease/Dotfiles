@@ -19,6 +19,8 @@
 "  http://learnvimscriptthehardway.stevelosh.com/
 "  https://dougblack.io/words/a-good-vimrc.html
 "  https://github.com/romainl/idiomatic-vimrc/
+"  https://alex.dzyoba.com/blog/vim-revamp/
+"  https://brigade.engineering/sharpen-your-vim-with-snippets-767b693886db
 
 
 " Reference floating windows {{{2
@@ -26,6 +28,9 @@
 "  https://www.reddit.com/r/neovim/comments/djmehv/im_probably_really_late_to_the_party_but_fzf_in_a/
 "  https://www.reddit.com/r/neovim/comments/di41cm/a_floating_terminal_with_borderpadding/
 "  https://www.reddit.com/r/neovim/comments/dggh28/plugin_that_utilizes_floating_windows/
+"  https://github.com/gabrielpoca/dotfiles/blob/master/roles/vim/files/nvim/lua/navigation/init.lua
+"  https://github.com/neovim/neovim/issues/9718
+"  https://github.com/wsdjeg/notifications.vim/blob/master/plugin/notification.vim
 
 
 " Reference .vimrc {{{2
@@ -34,6 +39,7 @@
 "  https://github.com/agkozak/dotfiles/blob/master/.vimrc
 "  https://github.com/Gandalf-/DotFiles/blob/master/etc/vimrc
 "  https://github.com/robertmeta/vimfiles/blob/master/vimrc
+"  https://github.com/vuhuucuong/dotfiles/blob/master/.vimrc
 
 
 " Plugins to consider {{{2
