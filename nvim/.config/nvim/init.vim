@@ -869,6 +869,11 @@ let g:which_key_use_floating_win = 1
 " https://github.com/LinArcX/VoidConf/blob/7568bf3d99228153ab12fc259a19b903e5612751/home/.config/nvim/plugin/which_key.vim
 " https://github.com/ChristianChiarulli/nvim/blob/8b11502fd63742e0b57db15d3ab45c5f35f485e4/modules/vim-which-key.vim
 
+function! FloatingGitStatus()
+    lua createFloatingWindow()
+    Gedit :
+endfunction
+
 " Which key mappings
 let g:which_key_map =  {
   \ 'name': '<leader>',
@@ -923,7 +928,7 @@ let g:which_key_map =  {
   \
   \ 'g': {
     \ 'name': '+git',
-    \ 's': [':Gstatus', 'git-status'],
+    \ 's': ['FloatingGitStatus()', 'git-status'],
     \ 'b': [':Gblame', 'git-blame'],
     \ 'c': [':Gcommit', 'git-commit'],
     \ 'l': [':Glog', 'git-log'],
