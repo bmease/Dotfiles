@@ -40,6 +40,7 @@
 "  https://github.com/Gandalf-/DotFiles/blob/master/etc/vimrc
 "  https://github.com/robertmeta/vimfiles/blob/master/vimrc
 "  https://github.com/vuhuucuong/dotfiles/blob/master/.vimrc
+"  https://github.com/fisadev/fisa-vim-config/blob/master/config.vimhttps://github.com/fisadev/fisa-vim-config/blob/master/config.vim
 
 
 " Plugins to consider {{{2
