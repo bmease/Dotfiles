@@ -165,7 +165,11 @@ Plug 'sheerun/vim-polyglot'
 " Syntax Highlight for Vue.js components
 Plug 'posva/vim-vue'
 
+" Vim-markdown {{{3
+Plug 'plasticboy/vim-markdown'
 
+" Markdown preview {{{3
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " }}}
 
@@ -409,6 +413,9 @@ set fillchars=vert:┃
 
 " Fold character
 set fillchars+=fold:·
+
+" Allow concealed characters
+set conceallevel=2
 
 " Jellybeans
 
@@ -855,6 +862,33 @@ augroup SubmodeConfig
     autocmd!
     autocmd VimEnter * call SetupSubmodeConfig()
 augroup END
+
+" Vim-markdown {{{2
+
+" Allow the TOC window to shrink if possible
+let g:vim_markdown_toc_autofit = 1
+
+" Follow named anchors in markdown links with the `ge` command
+let g:vim_markdown_follow_anchor = 1
+
+" Follow links `[link text](link-url)` by opening `link-url.md` with extension
+let g:vim_markdown_no_extensions_in_markdown = 1
+
+
+" Markdown preview {{{2
+
+" Allow markdown preview server public access
+let g:mkdp_open_to_the_world = 1
+
+" Custom ip preview server should use
+let g:mkdp_open_ip = '0.0.0.0'
+
+"let g:mkdp_port = '8081'
+
+" Echo preview page url in command line when open preview page
+let g:mkdp_echo_preview_url = 1
+
+
 
 " Vim Which Key {{{2
 
