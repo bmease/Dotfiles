@@ -96,6 +96,9 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Add vim-plug to generate documentation
+Plug 'junegunn/vim-plug'
+
 " }}}
 
 " User Interface {{{2
