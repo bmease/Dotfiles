@@ -873,8 +873,8 @@ let g:vim_markdown_toc_autofit = 1
 " Follow named anchors in markdown links with the `ge` command
 let g:vim_markdown_follow_anchor = 1
 
-" Follow links `[link text](link-url)` by opening `link-url.md` with extension
-let g:vim_markdown_no_extensions_in_markdown = 1
+" Do not Follow links `[link text](link-url)` by opening `link-url.md` with extension
+let g:vim_markdown_no_extensions_in_markdown = 0
 
 
 " Markdown preview {{{2
