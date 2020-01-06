@@ -546,6 +546,7 @@ augroup END
     " \ 'coc-vetur',  " Vue language extension
     " \ 'coc-yaml',  " YAML language extension
     " \ 'coc-snippets',  " Snippets
+    " \ 'coc-rls',  " Rust Language Server
 
 let g:coc_global_extensions = [
     \ 'coc-css',
@@ -561,6 +562,7 @@ let g:coc_global_extensions = [
     \ 'coc-vetur',
     \ 'coc-yaml',
     \ 'coc-snippets',
+    \ 'coc-rls',
 \ ]
 
 " Show all diagnostics
