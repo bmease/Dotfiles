@@ -996,8 +996,12 @@ endfunction
 " Which key mappings
 let g:which_key_map =  {
   \ 'name': '<leader>',
-  \ 'p': [':set paste!', 'toggle-paste'],
-  \ 's': [':set spell! |:set spell?', 'toggle-spell-check'],
+  \ 't': {
+    \ 'name': '+toggle',
+    \ 'p': [':set paste!', 'toggle-paste'],
+    \ 's': [':set spell! |:set spell?', 'toggle-spell-check'],
+    \ 't': [':Vista!!', 'toggle-tagbar'],
+  \ },
   \
   \ 'f': {
     \ 'name': '+format',
@@ -1035,7 +1039,6 @@ let g:which_key_map =  {
     \ 'q': [':copen', 'open-quick-fix'],
     \ 'l': [':lopen', 'open-location-list'],
     \ 'b': [':Clap buffers', 'open-buffers'],
-    \ 't': [':Vista!!', 'open-tagbar'],
     \ 'h': [':Helptags', 'search-help-tags'],
   \ },
   \
