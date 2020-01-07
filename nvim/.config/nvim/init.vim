@@ -179,6 +179,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Vim Clap {{{3
+" Modern performant generic finder and dispatcher for Vim and NeoVim
+Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
+
 " Ranger {{{3
 " Use ranger for file navigation. Requres bclose
 Plug 'francoiscabrol/ranger.vim'
@@ -779,7 +783,8 @@ let $FZF_DEFAULT_OPTS='--margin=1,2 --layout=reverse'
 lua require('helpers')
 
 " Create a floating window to use fzf
-let g:fzf_layout = { 'window': 'lua createFloatingWindow()' }
+" let g:fzf_layout = { 'window': 'lua createFloatingWindow()' }
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -891,6 +896,19 @@ let g:mkdp_open_ip = '0.0.0.0'
 let g:mkdp_echo_preview_url = 1
 
 
+" Vim Clap {{{2
+
+" Symbol to display when the async forerunner job is done
+let g:clap_forerunner_status_sign_done = '  '
+
+let g:clap_prompt_format = '%spinner% %provider_id%: '
+let g:clap_no_matches_msg = 'no matches found'
+
+
+let g:clap_search_box_border_style = 'nil'
+
+let g:clap_current_selection_sign = { 'text': '', 'texthl': "WarningMsg", "linehl": "ClapCurrentSelection" }
+let g:clap_selected_sign = { 'text': ' ', 'texthl': "WarningMsg", "linehl": "ClapSelected" }
 
 " Vim Which Key {{{2
 
@@ -903,6 +921,9 @@ set timeoutlen=500
 
 " Use floating window
 let g:which_key_use_floating_win = 1
+
+" Floating window config options
+let g:which_key_floating_opts = { 'row': '1', 'width': '-4' }
 
 " Reference key mappings
 " https://github.com/compilercomplied/dotfiles/blob/0dc674ddc24dd0723e6e38c919594a048ed5d2af/.vim/settings/rich/whichkey.vim
@@ -1009,12 +1030,11 @@ let g:which_key_map =  {
   \ 'o': {
     \ 'name': '+open',
     \ 'g': [':Ag', 'open-file-by-grep'],
-    \ 'f': [':GFiles --exclude-standard --cached --others', 'open-file-by-name'],
-    \ 'n': [':Ranger', 'open-file-by-browse'],
+    \ 'f': [':Clap git_files', 'open-file-by-name'],
     \ 'n': ['FloatingRanger()', 'open-file-by-browse'],
     \ 'q': [':copen', 'open-quick-fix'],
     \ 'l': [':lopen', 'open-location-list'],
-    \ 'b': [':Buffers', 'open-buffers'],
+    \ 'b': [':Clap buffers', 'open-buffers'],
     \ 't': [':Vista!!', 'open-tagbar'],
     \ 'h': [':Helptags', 'search-help-tags'],
   \ },
