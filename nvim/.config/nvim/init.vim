@@ -931,10 +931,46 @@ function! CreateCenteredFloatingWindow()
     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
     au BufWipeout <buffer> exe 'bw '.s:buf
 endfunction
+
 function! FloatingGitStatus()
-    lua createFloatingWindow()
+    " lua createFloatingWindow()
+    call CreateCenteredFloatingWindow()
     Gedit :
 endfunction
+
+
+function! FloatingRanger()
+    " Temp file ranger writes chosen file to
+    let s:choice_file_path = '/tmp/chosenfile'
+
+    " Create a new floating window
+    " lua createFloatingWindow()
+    call CreateCenteredFloatingWindow()
+
+    " Callback to open the chosen file
+    function! OnRangerExit(job_id, code, event)
+	" Close floating window
+        if a:code == 0
+            bwipeout!
+        endif
+    
+	" Open file
+        try
+    	  if filereadable(s:choice_file_path)
+    	    for f in readfile(s:choice_file_path)
+    		exec 'edit' . f
+    	    endfor
+    
+	    " Delete temp file
+    	    call delete(s:choice_file_path)
+    	  endif
+        endtry
+    endfunction
+
+    call termopen('ranger --choosefile=' . s:choice_file_path, { 'on_exit': function('OnRangerExit') })
+    startinsert
+endfunction
+
 
 " Which key mappings
 let g:which_key_map =  {
@@ -975,6 +1011,7 @@ let g:which_key_map =  {
     \ 'g': [':Ag', 'open-file-by-grep'],
     \ 'f': [':GFiles --exclude-standard --cached --others', 'open-file-by-name'],
     \ 'n': [':Ranger', 'open-file-by-browse'],
+    \ 'n': ['FloatingRanger()', 'open-file-by-browse'],
     \ 'q': [':copen', 'open-quick-fix'],
     \ 'l': [':lopen', 'open-location-list'],
     \ 'b': [':Buffers', 'open-buffers'],
