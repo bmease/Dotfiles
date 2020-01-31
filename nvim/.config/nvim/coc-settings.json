@@ -42,5 +42,5 @@
   "python.linting.pydocstyleEnabled": true,
   "python.linting.prospectorEnabled": true,
 
-  "python.autoComplete.extraPaths": ["/home/brad//Code/booru/app/vendor/lib/python3.6/site-packages"]
+  "python.autoComplete.extraPaths": ["/home/brad/Code/booru/app/vendor/lib/python3.6/site-packages"]
 }

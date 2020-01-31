@@ -31,10 +31,12 @@
 "  https://github.com/gabrielpoca/dotfiles/blob/master/roles/vim/files/nvim/lua/navigation/init.lua
 "  https://github.com/neovim/neovim/issues/9718
 "  https://github.com/wsdjeg/notifications.vim/blob/master/plugin/notification.vim
+"  https://github.com/skywind3000/vim-quickui
 
 
 " Reference .vimrc {{{2
 
+"  https://github.com/camspiers/dotfiles (floating windows, make install)
 "  https://bitbucket.org/sjl/dotfiles/
 "  https://github.com/agkozak/dotfiles/blob/master/.vimrc
 "  https://github.com/Gandalf-/DotFiles/blob/master/etc/vimrc
@@ -103,6 +105,12 @@ Plug 'junegunn/vim-plug'
 
 " User Interface {{{2
 Plug 'guns/xterm-color-table.vim'
+
+
+" Artify {{{3
+" change the display of characters without changing font
+Plug 'sainnhe/artify.vim'
+
 
 " Comfortable Motion {{{3
 " Physics-based smooth scrolling
@@ -181,7 +189,7 @@ Plug 'junegunn/fzf.vim'
 
 " Vim Clap {{{3
 " Modern performant generic finder and dispatcher for Vim and NeoVim
-Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
 " Ranger {{{3
 " Use ranger for file navigation. Requres bclose
@@ -544,7 +552,7 @@ augroup END
     " \ 'coc-html',  " Html language extension
     " \ 'coc-json',  " Json language extension
     " \ 'coc-prettier',  " format your JavaScript / TypeScript / CSS / JSON using Prettier
-    " \ 'coc-pyright',  " Pyright, type hint information for python
+    " \ 'coc-pyright',  " Pyright, type hint information for python (removed)
     " \ 'coc-python',  " Python language extension
     " \ 'coc-tsserver',  " Typescript(javascript) language extension
     " \ 'coc-vetur',  " Vue language extension
@@ -560,7 +568,6 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-prettier',
-    \ 'coc-pyright',
     \ 'coc-python',
     \ 'coc-tsserver',
     \ 'coc-vetur',
@@ -636,7 +643,7 @@ endfunction
 function! LightlineFugitive()
     if exists('*fugitive#head')
         let branch = fugitive#head()
-        return branch !=# '' ? ' '.branch : ''
+        return branch !=# '' ? ' ' . Artify(branch, 'monospace') : ''
     endif
     return ''
 endfunction
@@ -645,21 +652,50 @@ function! LightlineGutentags()
     return gutentags#statusline()
 endfunction
 
+function! LightlineMode()
+    " return Artify(lightline#mode(), 'monospace')
+    return winwidth(0) > 100
+      \ ? Artify(lightline#mode(), 'monospace')
+      \ : Artify(toupper(mode()), 'monospace')
+endfunction
+
 " TODO: Should check the length the filename and shorten if that is long?
 function! LightlineLineInfo()
     return winwidth(0) > 70 ? printf('%d:%-2d', line('.'), col('.')) : ''
 endfunction
 
+function! LightlineFilename()
+    " No filename
+    if expand('%:t') == ''
+	return Artify('[No Name]', 'monospace')
+    endif
+
+    return winwidth(0) > 100
+      \ ? Artify(expand('%:f'), 'monospace')
+      \ : Artify(expand('%:t'), 'monospace')
+endfunction
+
 function! LightlineFiletype()
-    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    " return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    " return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . Artify(&filetype, 'monospace') : 'no ft') : ''
+    "
+    " return winwidth(0) > 100
+    "   \ ? strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . Artify(&filetype, 'monospace') : 'no ft'
+    "   \ : strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : ''
+    
+    return strlen(&filetype)
+      \ ? WebDevIconsGetFileTypeSymbol()
+      \ : ''
 endfunction
 
 let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \             ['cocstatus', 'fugitive', 'readonly', 'relativepath', 'modified'] ],
-    \   'right': [ [ 'lineinfo' ], ['filetype'], ['gutentags'] ]
+    \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+    \   'right': [ [ 'lineinfo' ],
+    \             ['filetype'],
+    \             ['gutentags', 'cocstatus'] ]
     \ },
     \
     \ 'inactive': {
@@ -674,6 +710,8 @@ let g:lightline = {
     \   'cocstatus': 'coc#status',
     \   'lineinfo': 'LightlineLineInfo',
     \   'filetype': 'LightlineFiletype',
+    \   'mode': 'LightlineMode',
+    \   'filename': 'LightlineFilename',
     \ },
     \
     \ 'separator': { 'left': '', 'right': '' },
@@ -904,11 +942,16 @@ let g:clap_forerunner_status_sign_done = '  '
 let g:clap_prompt_format = '%spinner% %provider_id%: '
 let g:clap_no_matches_msg = 'no matches found'
 
+let g:clap_provider_grep_opts = '-g "!yarn.lock"'
+let g:clap_provider_grep_delay = 0
 
+let g:clap_spinner_frames = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏']
 let g:clap_search_box_border_style = 'nil'
 
 let g:clap_current_selection_sign = { 'text': '', 'texthl': "WarningMsg", "linehl": "ClapCurrentSelection" }
 let g:clap_selected_sign = { 'text': ' ', 'texthl': "WarningMsg", "linehl": "ClapSelected" }
+
+let g:clap_layout = { 'relative': 'editor' }
 
 " Vim Which Key {{{2
 
@@ -937,9 +980,11 @@ function! CreateCenteredFloatingWindow()
     let left = (&columns - width) / 2
     let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
-    let top = "╭" . repeat("─", width - 2) . "╮"
+    " let top = "╭" . repeat("─", width - 2) . "╮"
+    let top = "┌" . repeat("─", width - 2) . "┐"
     let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let bot = "└" . repeat("─", width - 2) . "┘"
+    " let bot = "╰" . repeat("─", width - 2) . "╯"
     let lines = [top] + repeat([mid], height - 2) + [bot]
     let s:buf = nvim_create_buf(v:false, v:true)
     call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
@@ -963,6 +1008,12 @@ endfunction
 function! FloatingRanger()
     " Temp file ranger writes chosen file to
     let s:choice_file_path = '/tmp/chosenfile'
+
+    " Path ranger should open
+    " % current file name
+    " :p expand to full path
+    " :h remove last path component
+    let path = ' ' . expand('%:p:h')
 
     " Create a new floating window
     " lua createFloatingWindow()
@@ -988,7 +1039,7 @@ function! FloatingRanger()
         endtry
     endfunction
 
-    call termopen('ranger --choosefile=' . s:choice_file_path, { 'on_exit': function('OnRangerExit') })
+    call termopen('ranger --choosefile=' . s:choice_file_path . path, { 'on_exit': function('OnRangerExit') })
     startinsert
 endfunction
 
@@ -1000,6 +1051,7 @@ let g:which_key_map =  {
     \ 'name': '+toggle',
     \ 'p': [':set paste!', 'toggle-paste'],
     \ 's': [':set spell! |:set spell?', 'toggle-spell-check'],
+    \ 'w': [':set wrap! |:set wrap?', 'toggle-wrap'],
     \ 't': [':Vista!!', 'toggle-tagbar'],
   \ },
   \
@@ -1033,8 +1085,10 @@ let g:which_key_map =  {
   \ },
   \ 'o': {
     \ 'name': '+open',
-    \ 'g': [':Ag', 'open-file-by-grep'],
-    \ 'f': [':Clap git_files', 'open-file-by-name'],
+    \ 'g': [':Clap grep', 'open-file-by-grep'],
+    \ 'f': [':Clap files', 'open-file-by-name'],
+    \ 'u': [':Clap git_diff_files', 'open-uncommited-git-files'],
+    \ 'r': [':Clap history', 'open-recent-files'],
     \ 'n': ['FloatingRanger()', 'open-file-by-browse'],
     \ 'q': [':copen', 'open-quick-fix'],
     \ 'l': [':lopen', 'open-location-list'],
