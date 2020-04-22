@@ -153,10 +153,12 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #for_window [class="^Firefox$"] border pixel 2
 
 # Hide all window titles
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 
 # Colors
 client.focused #4c7899 #1A9CBC #cccccc #2e9ef4
 
 # Use compton
 exec_always compton --daemon
+
+hide_edge_borders smart
