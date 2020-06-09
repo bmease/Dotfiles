@@ -15,8 +15,7 @@ setw -g window-status-style bg="colour233",fg="colour59",none
 setw -g window-status-activity-style bg="colour233",fg="colour25",none
 setw -g window-status-separator ""
 
-# set -g @prefix_highlight_style fg="colour189,bold",bg="colour25"
-set -g @prefix_highlight_fg 'colour189,bold'
+set -g @prefix_highlight_fg 'colour189'
 set -g @prefix_highlight_bg 'colour25'
 
 set -g @prefix_highlight_show_copy_mode 'on'
