@@ -27,7 +27,7 @@ set -g @cpu_high_fg_color "#[fg=#ff0000]"
 
 set -g status-left "#{prefix_highlight}#[fg=colour189,bg=colour25]  #S #[fg=colour25,bg=colour233,nobold,nounderscore,noitalics]"
 
-set -g status-right "#[fg=colour235,bg=colour233,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour235] #{cpu_fg_color}#{cpu_icon}#{cpu_percentage} #[fg=colour231,bg=colour235]  %Y-%m-%d  %H:%M #[fg=colour25,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour189,bg=colour25]  #h "
+set -g status-right "#[fg=colour235,bg=colour233,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour235] #{cpu_fg_color}#{cpu_icon}#{cpu_percentage} #[fg=colour231,bg=colour235]  %Y-%m-%d  %-I:%M #[fg=colour25,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour189,bg=colour25]  #h "
 
 setw -g window-status-format "#[fg=colour59,bg=colour233] #I#[fg=colour59,bg=colour233] #W "
 setw -g window-status-current-format "#[fg=colour235,bg=colour233,bold,nounderscore,noitalics]#[fg=colour231,bg=colour235] #I#[fg=colour231,bg=colour235] #W #[fg=colour235,bg=colour233,nobold,nounderscore,noitalics]"
