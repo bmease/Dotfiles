@@ -665,7 +665,7 @@ endfunction
 function! LightlineFugitive()
     if exists('*fugitive#head')
         let branch = fugitive#head()
-        return branch !=# '' ? ' ' . Artify(branch, 'monospace') : ''
+        return branch !=# '' ? ' ' . artify#convert(branch, 'monospace') : ''
     endif
     return ''
 endfunction
@@ -675,10 +675,10 @@ function! LightlineGutentags()
 endfunction
 
 function! LightlineMode()
-    " return Artify(lightline#mode(), 'monospace')
+    " return artify#convert(lightline#mode(), 'monospace')
     return winwidth(0) > 100
-      \ ? Artify(lightline#mode(), 'monospace')
-      \ : Artify(toupper(mode()), 'monospace')
+      \ ? artify#convert(lightline#mode(), 'monospace')
+      \ : artify#convert(toupper(mode()), 'monospace')
 endfunction
 
 " TODO: Should check the length the filename and shorten if that is long?
@@ -689,20 +689,20 @@ endfunction
 function! LightlineFilename()
     " No filename
     if expand('%:t') == ''
-	return Artify('[No Name]', 'monospace')
+	return artify#convert('[No Name]', 'monospace')
     endif
 
     return winwidth(0) > 100
-      \ ? Artify(expand('%:f'), 'monospace')
-      \ : Artify(expand('%:t'), 'monospace')
+      \ ? artify#convert(expand('%:f'), 'monospace')
+      \ : artify#convert(expand('%:t'), 'monospace')
 endfunction
 
 function! LightlineFiletype()
     " return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-    " return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . Artify(&filetype, 'monospace') : 'no ft') : ''
+    " return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . artify#convert(&filetype, 'monospace') : 'no ft') : ''
     "
     " return winwidth(0) > 100
-    "   \ ? strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . Artify(&filetype, 'monospace') : 'no ft'
+    "   \ ? strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . artify#convert(&filetype, 'monospace') : 'no ft'
     "   \ : strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : ''
     
     return strlen(&filetype)
