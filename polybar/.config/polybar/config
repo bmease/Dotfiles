@@ -177,6 +177,8 @@ format = <label>
 format-prefix = "  " 
 format-prefix-foreground = ${colors.foreground-alt}
 
+; requires informant package
+; data is stored in /var/cache/informant.dat which needs permissions changed so anyone can read and write or it will throw an error
 [module/informant-updates]
 type = custom/script
 exec = informant list --unread | wc -l
