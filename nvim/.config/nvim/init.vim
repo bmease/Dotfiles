@@ -21,6 +21,7 @@
 "  https://github.com/romainl/idiomatic-vimrc/
 "  https://alex.dzyoba.com/blog/vim-revamp/
 "  https://brigade.engineering/sharpen-your-vim-with-snippets-767b693886db
+"  https://learnxinyminutes.com/docs/vimscript/
 
 
 " Reference floating windows {{{2
@@ -43,6 +44,7 @@
 "  https://github.com/robertmeta/vimfiles/blob/master/vimrc
 "  https://github.com/vuhuucuong/dotfiles/blob/master/.vimrc
 "  https://github.com/fisadev/fisa-vim-config/blob/master/config.vimhttps://github.com/fisadev/fisa-vim-config/blob/master/config.vim
+"  https://github.com/beauwilliams/Dotfiles
 
 
 " Plugins to consider {{{2
@@ -52,19 +54,18 @@
 "  https://github.com/othree/jspc.vim
 "  https://github.com/janko-m/vim-test
 "  https://github.com/stylelint/stylelint
-"  https://github.com/liuchengxu/vim-clap
-"  https://github.com/vimwiki/vimwiki
 "  https://github.com/rhysd/git-messenger.vim
 "  https://github.com/kana/vim-textobj-user
 "  Float preview Plug 'ncm2/float-preview.nvim' can it work with coc?
 "  https://github.com/kkoomen/vim-doge
 "  https://github.com/haya14busa/incsearch.vim
+"  https://github.com/hardcoreplayers/dashboard-nvim
+"  https://github.com/wfxr/minimap.vim
 "
 "  https://github.com/junegunn/vim-peekaboo
 "  https://github.com/tomtom/quickfixsigns_vim
 "  https://github.com/numirias/semshi
 "  https://github.com/othree/javascript-libraries-syntax.vim
-"  https://github.com/liuchengxu/vim-which-key
 "  https://github.com/terryma/vim-expand-region
 "  https://wakatime.com/
 
@@ -108,9 +109,12 @@ Plug 'guns/xterm-color-table.vim'
 
 
 " Artify {{{3
-" change the display of characters without changing font
+" Change the display of characters without changing font
 Plug 'sainnhe/artify.vim'
 
+" Beacon {{{3
+" Flashes cursor on movement
+Plug 'danilamihailov/beacon.nvim'
 
 " Comfortable Motion {{{3
 " Physics-based smooth scrolling
@@ -189,7 +193,7 @@ Plug 'junegunn/fzf.vim'
 
 " Vim Clap {{{3
 " Modern performant generic finder and dispatcher for Vim and NeoVim
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
 " Ranger {{{3
 " Use ranger for file navigation. Requres bclose
@@ -272,6 +276,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 " A Vim alignment plugin
 Plug 'junegunn/vim-easy-align'
 
+" Vim Wiki {{{3
+" Personal Wiki for Vim
+Plug 'vimwiki/vimwiki'
 
 " }}}
 
@@ -313,9 +320,9 @@ set showmatch
 set mat=2
 
 " Tabs
-" set tabstop=4
-" set shiftwidth=4
-" set expandtab
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " Line numbers
 set number
@@ -432,7 +439,7 @@ set conceallevel=2
 " Jellybeans
 
 " Use italics in the terminal
-let g:jellybeans_use_term_italics = 1
+let g:jellybeans_use_term_italics = v:true
 
 " Override settings
 let g:jellybeans_overrides = {
@@ -537,6 +544,18 @@ augroup END
 
 "   Plugin Specific Settings {{{1
 
+" Beacon {{{2
+
+" Highlight jumps over 3
+let g:beacon_minimal_jump = 3
+
+" Highlight jump to searches regardless of distance
+nmap n n:Beacon<cr>
+nmap N N:Beacon<cr>
+nmap * *:Beacon<cr>
+nmap # #:Beacon<cr>
+
+
 " COC {{{2
 
 " Coc extensions to consider:
@@ -559,6 +578,7 @@ augroup END
     " \ 'coc-yaml',  " YAML language extension
     " \ 'coc-snippets',  " Snippets
     " \ 'coc-rls',  " Rust Language Server
+    " \ 'coc-godot',  " Godot Language Server
 
 let g:coc_global_extensions = [
     \ 'coc-css',
@@ -574,6 +594,7 @@ let g:coc_global_extensions = [
     \ 'coc-yaml',
     \ 'coc-snippets',
     \ 'coc-rls',
+    \ 'coc-godot',
 \ ]
 
 " Show all diagnostics
@@ -631,6 +652,7 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " set signcolumn=auto:2
+
 
 " Editorconfig {{{2
 let g:EditorConfig_max_line_indicator = 'line'
@@ -727,27 +749,27 @@ set noshowmode
 
 
 " NERD Commenter {{{2
-let g:NERDCommentEmptyLines = 1
-let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = v:true
+let g:NERDCompactSexyComs = v:true
 let g:NERDDefaultAlign = 'left'
-let g:NERDSpaceDelims = 1
-let g:NERDTrimTrailingWhitespace = 1
+let g:NERDSpaceDelims = v:true
+let g:NERDTrimTrailingWhitespace = v:true
 
 " bClose {{{2
 " Remove bclose key bindings
-let g:bclose_no_plugin_maps = 1
+let g:bclose_no_plugin_maps = v:true
 
 
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = '<c-n>'
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestEnhanced = v:true
+let g:SuperTabLongestHighlight = v:true
 
 
 
 
 " Maximizer {{{2
-let g:maximizer_set_default_mapping = 0
+let g:maximizer_set_default_mapping = v:false
 
 
 " Vista {{{2
@@ -762,7 +784,7 @@ let g:polyglot_disabled = ['vue']
 
 
 " Vue {{{2
-let g:vue_disable_pre_processors=1
+let g:vue_disable_pre_processors = v:true
 
 " To use NERDCommenter with Vue files, you can use its "hooks" feature to temporarily change the filetype.
 let g:ft = ''
@@ -860,10 +882,10 @@ let g:fzf_action = {
 
 " Ranger {{{2
 " map our own keys
-let g:ranger_map_keys = 0
+let g:ranger_map_keys = v:false
 
 " Replace netrw
-let g:ranger_replace_netrw = 1
+let g:ranger_replace_netrw = v:true
 
 
 " Git Gutter {{{2
@@ -875,11 +897,11 @@ set updatetime=100
 
 
 " JSDoc {{{2
-let g:javascript_plugin_jsdoc = 1
-let g:jsdoc_enable_es6=1
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_param_description_separator=' - '
+let g:javascript_plugin_jsdoc = v:true
+let g:jsdoc_enable_es6 = v:true
+let g:jsdoc_allow_input_prompt = v:true
+let g:jsdoc_input_description = v:true
+let g:jsdoc_param_description_separator = ' - '
 let g:jsdoc_user_defined_tags = {
     \ '@vue-data': 'data',
     \ '@vue-prop': 'prop',
@@ -889,7 +911,7 @@ nmap <leader>j :JsDoc<CR>
 
 
 " Vim Submode {{{2
-let g:submode_always_show_submode = 1
+let g:submode_always_show_submode = v:true
 
 function! SetupSubmodeConfig()
     call submode#enter_with('window', 'n', '', '<C-r>')
@@ -911,19 +933,19 @@ augroup END
 " Vim-markdown {{{2
 
 " Allow the TOC window to shrink if possible
-let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_toc_autofit = v:true
 
 " Follow named anchors in markdown links with the `ge` command
-let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_follow_anchor = v:true
 
 " Do not Follow links `[link text](link-url)` by opening `link-url.md` with extension
-let g:vim_markdown_no_extensions_in_markdown = 0
+let g:vim_markdown_no_extensions_in_markdown = v:false
 
 
 " Markdown preview {{{2
 
 " Allow markdown preview server public access
-let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_to_the_world = v:true
 
 " Custom ip preview server should use
 let g:mkdp_open_ip = '0.0.0.0'
@@ -931,26 +953,39 @@ let g:mkdp_open_ip = '0.0.0.0'
 "let g:mkdp_port = '8081'
 
 " Echo preview page url in command line when open preview page
-let g:mkdp_echo_preview_url = 1
+let g:mkdp_echo_preview_url = v:true
 
 
 " Vim Clap {{{2
 
 " Symbol to display when the async forerunner job is done
-let g:clap_forerunner_status_sign_done = '  '
+" let g:clap_forerunner_status_sign_done = '  '
+let g:clap_forerunner_status_sign_done = ' '
 
+
+" Add spacing to the clap prompt
 let g:clap_prompt_format = '%spinner% %provider_id%: '
+
+" Lowercase `no matches found`
 let g:clap_no_matches_msg = 'no matches found'
 
-let g:clap_provider_grep_opts = '-g "!yarn.lock"'
-let g:clap_provider_grep_delay = 0
+" Only use insert mode for clap
+let g:clap_insert_mode_only = v:true
 
-let g:clap_spinner_frames = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏']
+"
+" let g:clap_provider_grep_opts = '-g "!yarn.lock"'
+" let g:clap_provider_grep_delay = 0
+"
+" let g:clap_spinner_frames = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏']
+
+" Disable search box border symbol
 let g:clap_search_box_border_style = 'nil'
 
+" Clap selection icons
 let g:clap_current_selection_sign = { 'text': '', 'texthl': "WarningMsg", "linehl": "ClapCurrentSelection" }
 let g:clap_selected_sign = { 'text': ' ', 'texthl': "WarningMsg", "linehl": "ClapSelected" }
 
+" Open clap window relative to the entire editor
 let g:clap_layout = { 'relative': 'editor' }
 
 " Vim Which Key {{{2
@@ -963,7 +998,7 @@ vnoremap <silent> <leader> :<c-u>WhichKeyVisual ','<CR>
 set timeoutlen=500
 
 " Use floating window
-let g:which_key_use_floating_win = 1
+let g:which_key_use_floating_win = v:true
 
 " Floating window config options
 let g:which_key_floating_opts = { 'row': '1', 'width': '-4' }
@@ -1085,15 +1120,18 @@ let g:which_key_map =  {
   \ },
   \ 'o': {
     \ 'name': '+open',
-    \ 'g': [':Clap grep', 'open-file-by-grep'],
+    \ 'b': [':Clap buffers', 'open-buffers'],
     \ 'f': [':Clap files', 'open-file-by-name'],
-    \ 'u': [':Clap git_diff_files', 'open-uncommited-git-files'],
-    \ 'r': [':Clap history', 'open-recent-files'],
+    \ 'g': [':Clap grep', 'open-file-by-grep'],
+    \ 'h': [':Helptags', 'search-help-tags'],
+    \ 'l': [':lopen', 'open-location-list'],
+    \ 'm': [':Clap marks', 'open-marks'],
     \ 'n': ['FloatingRanger()', 'open-file-by-browse'],
     \ 'q': [':copen', 'open-quick-fix'],
-    \ 'l': [':lopen', 'open-location-list'],
-    \ 'b': [':Clap buffers', 'open-buffers'],
-    \ 'h': [':Helptags', 'search-help-tags'],
+    \ 'r': [':Clap history', 'open-recent-files'],
+    \ 's': [':Clap search_history', 'open-search-history'],
+    \ 'u': [':Clap git_diff_files', 'open-uncommited-git-files'],
+    \ 'y': [':Clap yanks', 'open-yanks'],
   \ },
   \
   \ 'v': {
@@ -1111,6 +1149,18 @@ let g:which_key_map =  {
     \ 'A': [':Gcommit --amend', 'git-commit--amend'],
     \ 'B': [':BCommits', 'search-buffer-git-commits'],
     \ 'C': [':Commits', 'search-git-commits']
+  \ },
+  \
+  \ 'z': {
+    \ 'name': '+folding',
+    \ 'o': ['zo', 'open-fold'],
+    \ 'O': ['zO', 'open-fold-recursively'],
+    \ 'c': ['zc', 'close-fold'],
+    \ 'C': ['zC', 'close-fold-recursively'],
+    \ 't': ['zt', 'toggle-fold'],
+    \ 'T': ['zT', 'toggle-fold-recursively'],
+    \ 'M': ['zM', 'close-all-folds'],
+    \ 'R': ['zR', 'open-all-folds'],
   \ },
   \
   \ 'P': {
