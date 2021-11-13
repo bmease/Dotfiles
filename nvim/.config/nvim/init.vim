@@ -33,6 +33,8 @@
 "  https://github.com/neovim/neovim/issues/9718
 "  https://github.com/wsdjeg/notifications.vim/blob/master/plugin/notification.vim
 "  https://github.com/skywind3000/vim-quickui
+"
+" Which-key reference: https://gist.github.com/folke/942b1492d5e701572518719343b921de
 
 
 " Reference .vimrc {{{2
