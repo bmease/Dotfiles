@@ -171,7 +171,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 
 [module/aur-updates]
 type = custom/script
-exec = pacaur --check | wc -l
+exec = yay -Qua | wc -l
 interval = 900
 format = <label>
 format-prefix = "  " 
