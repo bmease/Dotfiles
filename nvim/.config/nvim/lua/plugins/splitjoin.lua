@@ -1,7 +1,8 @@
 -- Which-key mappings
-mappings = {
+local mappings = {
     g = {
         S = { "Split Into Multiple Lines" },
+        J = { "Join Multiple Lines" },
     },
 }
 

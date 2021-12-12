@@ -127,7 +127,7 @@ return require('packer').startup({function(use)
     use_with_config("numToStr/Comment.nvim", "comment")
 
     -- FIXME: Not working with latest neovim: https://github.com/AndrewRadev/splitjoin.vim/issues/178
-    -- use_with_config("AndrewRadev/splitjoin.vim", "splitjoin")
+    use_with_config("AndrewRadev/splitjoin.vim", "splitjoin")
 
     -- Todo Comments
     -- Highlight, list and search todo comments in your projects
