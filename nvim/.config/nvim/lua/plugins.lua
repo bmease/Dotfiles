@@ -182,6 +182,10 @@ return require('packer').startup({function(use)
     -- Dims inactive portions of the code you're editing using TreeSitter
     use_with_config("folke/twilight.nvim", "twilight")
 
+    -- Maximizer
+    -- Maximizes and restores the current windows
+    use_with_config("szw/vim-maximizer", "vim-maximizer")
+
     -- LSP
     use_with_config("neovim/nvim-lspconfig", "lsp")
 
