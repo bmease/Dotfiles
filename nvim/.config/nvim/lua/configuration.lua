@@ -50,3 +50,11 @@ vim.cmd([[
     augroup END
 ]])
 
+
+-- Open Help window above other windows
+vim.cmd([[
+    augroup neovim_help
+        autocmd!
+        autocmd BufEnter *.txt if &buftype == 'help' | wincmd K | endif
+    augroup END
+]])
