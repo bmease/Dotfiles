@@ -61,6 +61,11 @@ return require('packer').startup({function(use)
     -- Change the display of characters without changing font
     use 'sainnhe/artify.vim'
 
+
+    -- Shade
+    -- Dim inactive windows
+    use_with_config("sunjon/shade.nvim", "shade")
+
     use({
         "nvim-lualine/lualine.nvim",
         requires = {"kyazdani42/nvim-web-devicons", opt = true},
