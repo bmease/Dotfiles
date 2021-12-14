@@ -175,6 +175,10 @@ return require('packer').startup({function(use)
     -- A Git wrapper so awesome, it should be illegal
     use_with_config("tpope/vim-fugitive", "fugitive")
 
+    -- FloatTerm
+    -- Terminal manager for (neo)vim
+    use_with_config("voldikss/vim-floaterm", "vim-floaterm")
+
     -- Which Key
     -- Displays a popup with possible keybindings of the command you started typing
     use_with_config("folke/which-key.nvim", "which-key")

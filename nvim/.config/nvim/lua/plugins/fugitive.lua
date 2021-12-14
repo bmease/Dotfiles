@@ -1,9 +1,12 @@
 -- Which-key mappings
-mappings = {
+local mappings = {
     g = {
         name = "Git",
-        s = { ":Git<cr>", "Git Status" },
-        l = { ":Gclog<cr>", "Git Log" },
+        b = { ":Git blame<CR>", "Git blame" },
+        l = {
+            name = "List",
+            l = { ":Gclog<CR>", "Git log" },
+        }
     },
 }
 
