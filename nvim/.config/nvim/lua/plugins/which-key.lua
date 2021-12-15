@@ -1,4 +1,22 @@
-require("which-key").setup({})
+require("which-key").setup({
+    plugins = {
+        spelling = {
+            enabled = true
+        },
+    },
+
+    icons = {
+        separator = " ➜ ",
+
+    },
+
+    layout = {
+        width = { min = 20, max = 70 },
+        spacing = 10,
+        align = "center"
+    }
+
+})
 
 -- Highlight groups defined for WhichKey with their default link
 -- https://github.com/folke/which-key.nvim#-colors
