@@ -12,7 +12,7 @@ imap("jj", "<Esc>")
 vmap("v", "<Esc>")
 
 -- Retain selection in visual mode when indenting blocks
-vmap(">", "<gv")
+vmap("<", "<gv")
 vmap(">", ">gv")
 
 -- Window splits
