@@ -1,5 +1,5 @@
 require('lspconfig').pyright.setup({})
-require("null-ls").config({})
+require("null-ls").setup({})
 
 
 -- Which-key mappings
