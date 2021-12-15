@@ -195,6 +195,10 @@ return require('packer').startup({function(use)
     -- Maximizes and restores the current windows
     use_with_config("szw/vim-maximizer", "vim-maximizer")
 
+    -- Nvim Autopairs
+    -- A super powerful autopair plugin for Neovim
+    use_with_config('windwp/nvim-autopairs', 'nvim-autopairs')
+
     -- LSP
     use_with_config("neovim/nvim-lspconfig", "lsp")
 

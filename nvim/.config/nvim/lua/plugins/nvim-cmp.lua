@@ -83,3 +83,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
 --     capabilities = capabilities
 -- }
+
+-- insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
