@@ -2,9 +2,11 @@ local M = {}
 
 
 -- remap function
-M.map = function(mode, shortcut, command)
+local map = function(mode, shortcut, command)
 	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
+
+M.map = map
 
 M.nmap = function(shortcut, command)
 	map("n", shortcut, command)
