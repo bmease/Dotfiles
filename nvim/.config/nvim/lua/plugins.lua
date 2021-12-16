@@ -206,6 +206,14 @@ return require('packer').startup({function(use)
     -- A super powerful autopair plugin for Neovim
     use_with_config('windwp/nvim-autopairs', 'nvim-autopairs')
 
+    -- Neogen
+    -- A better annotation generator.
+    use_with_config(
+        "danymat/neogen",
+        "neogen",
+        { requires = "nvim-treesitter/nvim-treesitter" }
+    )
+
     -- LSP
     use_with_config("neovim/nvim-lspconfig", "lsp")
 
