@@ -72,7 +72,7 @@ return require('packer').startup({function(use)
 
     -- Artify
     -- Change the display of characters without changing font
-    use 'sainnhe/artify.vim'
+    use 'delphinus/artify.nvim'
 
 
     -- Shade
