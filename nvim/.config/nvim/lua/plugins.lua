@@ -19,8 +19,21 @@ return require('packer').startup({function(use)
         return string.format("require('plugins.%s')", name)
     end
 
-    local use_with_config = function(path, name, ...)
-        use({ path, config = config(name), ... })
+    --- Packer use with config in a separate file.
+    --
+    --- @param package string - Path to the package to install.
+    --- @param filename string - Name of config file located in `lua/plugins/`.
+    --- @param options table - Additional options to include.
+    local use_with_config = function(package, filename, options)
+        options = options or {}
+
+        local params = { package, config = config(filename) }
+
+        for key, value in ipairs(options) do
+            params[key] = value
+        end
+
+        use(params)
     end
 
     -- Packer can manage itself
@@ -66,23 +79,20 @@ return require('packer').startup({function(use)
     -- Dim inactive windows
     use_with_config("sunjon/shade.nvim", "shade")
 
-    use({
+    use_with_config(
         "nvim-lualine/lualine.nvim",
-        requires = {"kyazdani42/nvim-web-devicons", opt = true},
-        config = function()
-            require("plugins/lualine")
-        end
-    })
+        "lualine",
+        { requires = {"kyazdani42/nvim-web-devicons", opt = true} }
+    )
 
     -- Nvim Treesitter
     -- An incremental parsing system for programming tools
-    use({
-        'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require("plugins/nvim-treesitter")
-        end,
-        run = ':TSUpdate'
-    })
+
+    use_with_config(
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-treesitter",
+        { run = ':TSUpdate' }
+    )
 
     -- Rainbow parentheses powered by tree-sitter
     use {
@@ -162,14 +172,11 @@ return require('packer').startup({function(use)
 
     -- Telescope
     -- A highly extendable fuzzy finder over lists
-    use({
+    use_with_config(
         "nvim-telescope/telescope.nvim",
-    	requires = { {'nvim-lua/plenary.nvim'} },
-        config = function()
-            require("plugins/telescope")
-        end
-    })
-
+        "telescope",
+        { requires = {"nvim-lua/plenary.nvim"} }
+    )
 
     -- Fugitive
     -- A Git wrapper so awesome, it should be illegal
