@@ -2,17 +2,13 @@
 
 
 local fn = vim.fn
+
+
+-- Automatically install packer
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
-
--- Plugins to consider:
---  - Neogen
---      https://github.com/danymat/neogen
---      A better annotation generator. Supports multiple languages and annotation conventions.
---
---
 
 return require('packer').startup({function(use)
     local config = function(name)
@@ -240,7 +236,7 @@ return require('packer').startup({function(use)
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
-    if packer_bootstrap then
+    if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
 -- end})
