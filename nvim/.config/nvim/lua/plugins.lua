@@ -229,6 +229,10 @@ return require('packer').startup({function(use)
     -- LSP
     use_with_config("neovim/nvim-lspconfig", "lsp")
 
+    -- LSP Signature
+    -- LSP signature hint as you type
+    use "ray-x/lsp_signature.nvim"
+
     -- Null-ls
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     -- TODO: Add sources

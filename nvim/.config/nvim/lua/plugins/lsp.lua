@@ -94,6 +94,14 @@ M.on_attach = function(client, bufnr)
       ]]
     end
 
+    -- Register lsp signature
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border= "rounded"
+      }
+    }, bufnr)
+
     -- unmapped:
     -- nmap('<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
     -- nmap('<leader>le', '<cmd>lua vim.diagnostic.open_float()<CR>')
