@@ -1,4 +1,19 @@
 -- TODO: [Basic Customisations](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations)
+-- TODO: Install [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
+-- TODO: Install [iswap](https://github.com/mizlan/iswap.nvim)
+-- TODO: Install [vim-move](https://github.com/matze/vim-move)
+-- TODO: Consider installing [specs](https://github.com/edluffy/specs.nvim)
+-- TODO: Consider installing neogit
+-- TODO: Install [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
+-- FIXME: Consider getting rid of floatterm for fugitive
+-- TODO: Install [vim-submode](https://github.com/kana/vim-submode)
+-- TODO: Install vim-wiki
+-- TODO: Install [bufferline](https://github.com/akinsho/bufferline.nvim)
+-- TODO: Install []()
+
+-- Plugins to consider:
+--
+--
 
 
 local fn = vim.fn
@@ -35,6 +50,8 @@ return require('packer').startup({function(use)
     -- Packer can manage itself
     -- use 'wbthomason/packer.nvim'
     use_with_config("wbthomason/packer.nvim", "packer")
+
+    use "nvim-lua/plenary.nvim"
 
     -- Jellybeans
     -- A colorful, dark color scheme for Vim
@@ -73,7 +90,7 @@ return require('packer').startup({function(use)
 
     -- Shade
     -- Dim inactive windows
-    use_with_config("sunjon/shade.nvim", "shade")
+    -- use_with_config("sunjon/shade.nvim", "shade")
 
     use_with_config(
         "nvim-lualine/lualine.nvim",
@@ -83,7 +100,6 @@ return require('packer').startup({function(use)
 
     -- Nvim Treesitter
     -- An incremental parsing system for programming tools
-
     use_with_config(
         "nvim-treesitter/nvim-treesitter",
         "nvim-treesitter",
@@ -102,6 +118,12 @@ return require('packer').startup({function(use)
         after = {'nvim-treesitter'},
     }
 
+    -- Treesitter powered spellchecker
+    use 'lewis6991/spellsitter.nvim'
+
+    -- Vim Sleuth
+    -- Heuristically set buffer options
+    use 'tpope/vim-sleuth'
 
     -- Beacon
     -- Flash cursor when moving
@@ -205,6 +227,7 @@ return require('packer').startup({function(use)
 
     -- Null-ls
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    -- TODO: Add sources
     use "jose-elias-alvarez/null-ls.nvim"
 
     use 'hrsh7th/cmp-nvim-lsp'

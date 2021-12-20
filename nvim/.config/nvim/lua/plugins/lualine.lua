@@ -1,4 +1,5 @@
 -- TODO: Add [lsp-status](https://github.com/nvim-lua/lsp-status.nvim)
+-- TODO: Or??? Add [lsp-progress](https://github.com/arkav/lualine-lsp-progress)
 
 local artify = require('artify')
 
@@ -91,7 +92,7 @@ local filetype = {
 local config = {
     options = {
         icons_enabled = true,
-        theme = 'auto',
+        theme = 'tokyonight',
         -- component_separators = { left = '', right = ''},
         -- section_separators = { left = '', right = ''},
         component_separators = { left = '', right = ''},
