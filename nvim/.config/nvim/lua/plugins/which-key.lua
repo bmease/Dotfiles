@@ -14,6 +14,12 @@ require("which-key").setup({
         width = { min = 20, max = 70 },
         spacing = 10,
         align = "center"
+    },
+
+    window = {
+        border = "rounded",
+        -- style = "minimal",
+        winblend = 10
     }
 
 })
@@ -42,23 +48,31 @@ local opts = {
 }
 
 local mappings = {
+    name = "Leader",
+
+    h = {
+        name = "Hunk"
+    },
+
     o = {
-        name = "open",
+        name = "Open",
         l = { ":lopen<CR>", "  Open Location List" },
         q = { ":copen<CR>", "  Open Quick Fix" },
     },
 
     t = {
-        name = "toggle",
+        name = "Toggle",
         p = { ":set paste!<CR>:echo 'Toggle Paste'<CR>", " Toggle Paste" },
         s = { ":set spell!<CR>:echo 'Toggle Spell Check'<CR>", "暈Toggle Spell Check" }
     },
 
     v = {
-        name = "vimrc",
+        name = "Vimrc",
         e = { ":e $MYVIMRC<CR>"," Edit Neovim Init" },
         s = { ":luafile %<CR>:echo 'Sourced Neovim Init'<CR>", " Source Neovim Init" },
     },
+
+    ["?"] = { ":WhichKey<CR>", "Keymapping Help" }
 }
 
 local wk = require("which-key")
