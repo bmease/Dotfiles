@@ -44,20 +44,20 @@ local opts = {
 local mappings = {
     o = {
         name = "open",
-        l = { ":lopen<CR>", "Open Location List" },
-        q = { ":copen<CR>", "Open Quick Fix" },
+        l = { ":lopen<CR>", "  Open Location List" },
+        q = { ":copen<CR>", "  Open Quick Fix" },
     },
 
     t = {
         name = "toggle",
-        p = { ":set paste!<CR>:echo 'Toggle Paste'<CR>", "Toggle Paste" },
-        s = { ":set spell!<CR>:echo 'Toggle Spell Check'<CR>", "Toggle Spell Check" }
+        p = { ":set paste!<CR>:echo 'Toggle Paste'<CR>", " Toggle Paste" },
+        s = { ":set spell!<CR>:echo 'Toggle Spell Check'<CR>", "暈Toggle Spell Check" }
     },
 
     v = {
         name = "vimrc",
-        e = { ":e $MYVIMRC<CR>","Edit Neovim Init" },
-        s = { ":luafile %<CR>:echo 'Sourced Neovim Init'<CR>", "Source Neovim Init" },
+        e = { ":e $MYVIMRC<CR>"," Edit Neovim Init" },
+        s = { ":luafile %<CR>:echo 'Sourced Neovim Init'<CR>", " Source Neovim Init" },
     },
 }
 

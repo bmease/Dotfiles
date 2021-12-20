@@ -1,7 +1,7 @@
 -- Which-key mappings
 mappings = {
     t = {
-        m = { ":SignatureToggle<cr>", "Toggle Marks" },
+        m = { ":SignatureToggle<cr>", " Toggle Marks" },
     },
 }
 

@@ -16,22 +16,22 @@ tmap("<esc>", [[<C-\><C-n>:FloatermToggle<CR>]])
 -- Which-key mappings
 local mappings = {
     g = {
-        s = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git' +only<CR>", "Git status" },
-        c = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git commit' +only<CR>", "Git commit" },
-        C = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git commit --amend' +only<CR>", "Git commit amend" },
+        s = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git' +only<CR>", "  Git status" },
+        c = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git commit' +only<CR>", "  Git commit" },
+        C = { ":FloatermNew --disposable --autoclose=2 nvim -c ':Git commit --amend' +only<CR>", "  Git commit amend" },
     },
 
     o = {
-        n = { [[:FloatermNew --disposable --opener=edit --title=Open\ File ranger<CR>]], "Open file by browsing" },
-        p = { ":FloatermNew<CR>", "Open terminal"}
+        n = { [[:FloatermNew --disposable --opener=edit --title=Open\ File ranger<CR>]], "פּ  Open file by browsing" },
+        p = { ":FloatermNew<CR>", "  Open terminal"}
     },
 
     t = {
         t = {
-            name = "Terminal",
-            t = { ":FloatermToggle<CR>", "Toggle terminal" },
-            n = { ":FloatermNext<CR>", "Toggle terminal" },
-            p = { ":FloatermPrev<CR>", "Toggle terminal" },
+            name = " Terminal",
+            t = { ":FloatermToggle<CR>", "  Toggle terminal" },
+            n = { ":FloatermNext<CR>", "  Next terminal" },
+            p = { ":FloatermPrev<CR>", "  Previous terminal" },
         },
     }
 }
