@@ -14,7 +14,8 @@ require'nvim-treesitter.configs'.setup {
     },
 
     indent = {
-        enable = true
+        -- FIXME: Disabled due to issues where indentation doesn't work
+        enable = false
     },
 
     textObjects = {
