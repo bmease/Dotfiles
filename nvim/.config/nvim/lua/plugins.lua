@@ -236,7 +236,7 @@ return require('packer').startup({function(use)
     -- Null-ls
     -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     -- TODO: Add sources
-    use "jose-elias-alvarez/null-ls.nvim"
+    use_with_config("jose-elias-alvarez/null-ls.nvim", "null-ls")
 
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
