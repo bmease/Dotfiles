@@ -15,8 +15,8 @@ vmap("<", "<gv")
 vmap(">", ">gv")
 
 -- Window splits
-nmap("<C-_>", ":split<CR>")
-nmap("<C-Bslash", ":vsplit<CR>")
+-- nmap("<C-_>", ":split<CR>")
+-- nmap("<C-Bslash", ":vsplit<CR>")
 
 -- Folding
 nmap("<space>", "za")
