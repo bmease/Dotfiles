@@ -92,6 +92,10 @@ return require('packer').startup({function(use)
     -- Dim inactive windows
     -- use_with_config("sunjon/shade.nvim", "shade")
 
+    -- Alpha Nvim
+    -- Lua powered greeter like vim-startify / dashboard-nvim
+    use_with_config("goolord/alpha-nvim", "alpha-nvim")
+
     use_with_config(
         "nvim-lualine/lualine.nvim",
         "lualine",
