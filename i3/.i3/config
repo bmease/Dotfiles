@@ -27,6 +27,10 @@ floating_modifier $mod
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec st -t "Suckless Terminal" -f "SauceCodePro Nerd Font:size=14"
 
+# FIXME: https://github.com/ryanoasis/nerd-fonts/issues/442
+# Mono fixes nerd font characters being cut off, but the icons are really small
+# bindsym $mod+Return exec st -t "Suckless Terminal" -f "SauceCodePro Nerd Font Mono:size=14"
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
