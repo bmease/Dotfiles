@@ -14,9 +14,9 @@ vim.diagnostic.config({
   float = {
     source = "always",
     -- Doesn't work? not in help but other people use it?
-    -- focusable = false,
-    -- border = "rounded",
-    -- style = "minimal"
+    focusable = false,
+    border = "rounded",
+    style = "minimal"
   }
 })
 
@@ -75,23 +75,11 @@ local M = {}
 vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 
--- Border icons
--- local border = {
---       {"┌", "FloatBorder"},
---       {"▔", "FloatBorder"},
---       {"🭾", "FloatBorder"},
---       {"▕", "FloatBorder"},
---       {"🭿", "FloatBorder"},
---       {"▁", "FloatBorder"},
---       {"🭼", "FloatBorder"},
---       {"▏", "FloatBorder"},
--- }
---
--- -- Handler function to enable borders with hover and signatureHelp
--- M.handlers = {
---   ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
---   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
--- }
+-- -- Handlers to enable borders with hover and signatureHelp
+M.handlers = {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = false }),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", focusable = false }),
+}
 
 M.on_attach = function(client, bufnr)
 
@@ -151,6 +139,7 @@ M.on_attach = function(client, bufnr)
             a = { "<cmd>Telescope lsp_code_actions<CR>", "Code actions" },
             D = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type Definition" },
             f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format current buffer" },
+            k = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
             q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Add buffer diagnostics to location list" },
             r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
             w = {

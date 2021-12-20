@@ -24,7 +24,7 @@ lsp_installer.on_server_ready(function(server)
     -- Specify the default options which we'll use to setup all servers
     local default_opts = {
         on_attach = lsp.on_attach,
-        -- handlers = lsp.handlers
+        handlers = lsp.handlers
     }
 
     -- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
