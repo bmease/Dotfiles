@@ -27,19 +27,29 @@ set.inccommand = 'nosplit'
 set.showmatch = true
 set.mat = 2
 
+-- Highlight current line
+set.cursorline = true
+
 -- Highlight long lines
 set.colorcolumn = "79"
+
+-- Enable mouse
+set.mouse = "n"
 
 -- Line numbers
 set.number = true
 set.relativenumber = true
-vim.o.signcolumn = "yes"
+set.signcolumn = "yes"
 
 -- Tabs
 set.tabstop = 4
 set.shiftwidth = 4
 set.softtabstop = 4
 set.expandtab = true
+
+-- Window
+set.splitbelow = true
+set.splitright = true
 
 
 -- Highlight on yank
