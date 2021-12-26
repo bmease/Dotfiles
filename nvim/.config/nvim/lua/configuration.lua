@@ -51,6 +51,10 @@ set.expandtab = true
 set.splitbelow = true
 set.splitright = true
 
+-- Folding
+set.foldmethod = 'expr'
+set.foldexpr = 'nvim_treesitter#foldexpr()'
+
 
 -- Highlight on yank
 vim.cmd([[
