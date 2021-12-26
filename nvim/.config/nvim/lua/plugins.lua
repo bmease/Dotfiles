@@ -1,10 +1,8 @@
 -- TODO: [Basic Customisations](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations)
--- TODO: Install [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
 -- TODO: Install [iswap](https://github.com/mizlan/iswap.nvim)
 -- TODO: Install [vim-move](https://github.com/matze/vim-move)
 -- TODO: Consider installing [specs](https://github.com/edluffy/specs.nvim)
 -- TODO: Consider installing neogit
--- TODO: Install [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
 -- FIXME: Consider getting rid of floatterm for fugitive
 -- TODO: Install [vim-submode](https://github.com/kana/vim-submode)
 -- TODO: Install vim-wiki
@@ -128,6 +126,10 @@ return require('packer').startup({function(use)
     -- nvim-ts-context-commentstring
     -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+    -- nvim-ts-autotag
+    -- Use treesitter to auto close and auto rename html tag
+    use 'windwp/nvim-ts-autotag'
 
     -- Symbols outline
     -- A tree like view for symbols in Neovim using the Language Server Protocol
