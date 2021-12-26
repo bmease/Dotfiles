@@ -125,6 +125,10 @@ return require('packer').startup({function(use)
     -- Treesitter powered spellchecker
     use 'lewis6991/spellsitter.nvim'
 
+    -- Symbols outline
+    -- A tree like view for symbols in Neovim using the Language Server Protocol
+    use_with_config("simrat39/symbols-outline.nvim", "symbols-outline")
+
     -- Vim Sleuth
     -- Heuristically set buffer options
     use 'tpope/vim-sleuth'
