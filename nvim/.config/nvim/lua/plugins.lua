@@ -260,10 +260,11 @@ return require('packer').startup({function(use)
 
     -- Trouble
     -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing
-    use({
+    use_with_config(
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-    })
+        "trouble",
+        { requires = "kyazdani42/nvim-web-devicons" }
+    )
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
