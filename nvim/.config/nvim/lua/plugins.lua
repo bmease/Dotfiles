@@ -7,7 +7,6 @@
 -- TODO: Install [vim-submode](https://github.com/kana/vim-submode)
 -- TODO: Install vim-wiki
 -- TODO: Install [Codi](https://github.com/metakirby5/codi.vim)
--- TODO: Install [Friendly Snippets](https://github.com/rafamadriz/friendly-snippets)
 -- TODO: Install []()
 
 -- Plugins to consider:
@@ -256,6 +255,8 @@ return require('packer').startup({function(use)
     -- TODO: Add sources
     use_with_config("jose-elias-alvarez/null-ls.nvim", "null-ls")
 
+    -- Nvim Cmp
+    -- A completion plugin for neovim coded in Lua.
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -264,6 +265,11 @@ return require('packer').startup({function(use)
     use 'hrsh7th/vim-vsnip'
     use_with_config("hrsh7th/nvim-cmp", "nvim-cmp")
 
+    -- Friendly Snippets
+    -- Set of preconfigured snippets for different languages
+    use "rafamadriz/friendly-snippets"
+
+    -- Nvim LSP Installer
     use_with_config("williamboman/nvim-lsp-installer", "nvim-lsp-installer")
 
     -- Trouble
