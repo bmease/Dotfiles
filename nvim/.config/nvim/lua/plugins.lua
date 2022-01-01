@@ -6,7 +6,8 @@
 -- FIXME: Consider getting rid of floatterm for fugitive
 -- TODO: Install [vim-submode](https://github.com/kana/vim-submode)
 -- TODO: Install vim-wiki
--- TODO: Install [bufferline](https://github.com/akinsho/bufferline.nvim)
+-- TODO: Install [Codi](https://github.com/metakirby5/codi.vim)
+-- TODO: Install [Friendly Snippets](https://github.com/rafamadriz/friendly-snippets)
 -- TODO: Install []()
 
 -- Plugins to consider:
@@ -85,6 +86,13 @@ return require('packer').startup({function(use)
     -- Change the display of characters without changing font
     use 'delphinus/artify.nvim'
 
+    -- Bufferline
+    -- A snazzy bufferline for Neovim
+    use_with_config(
+        "akinsho/bufferline.nvim",
+        "bufferline",
+        { requires = {'kyazdani42/nvim-web-devicons'} }
+    )
 
     -- Shade
     -- Dim inactive windows
