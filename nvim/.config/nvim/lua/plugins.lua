@@ -101,6 +101,12 @@ return require('packer').startup({function(use)
     -- Lua powered greeter like vim-startify / dashboard-nvim
     use_with_config("goolord/alpha-nvim", "alpha-nvim")
 
+    -- Lualine LSP Progress
+    -- LSP Progress lualine componenet
+    use "arkav/lualine-lsp-progress"
+
+    -- Lualine
+    -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
     use_with_config(
         "nvim-lualine/lualine.nvim",
         "lualine",

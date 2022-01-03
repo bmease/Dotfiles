@@ -1,6 +1,3 @@
--- TODO: Add [lsp-status](https://github.com/nvim-lua/lsp-status.nvim)
--- TODO: Or??? Add [lsp-progress](https://github.com/arkav/lualine-lsp-progress)
-
 local artify = require('artify')
 
 -- Breakpoints --
@@ -104,7 +101,7 @@ local config = {
         lualine_a = {mode},
         lualine_b = {branch, diff, diagnostics},
         lualine_c = {filename},
-        lualine_x = {filetype},
+        lualine_x = {'lsp_progress', filetype},
         lualine_y = {location},
         lualine_z = {progress}
     },
@@ -120,7 +117,6 @@ local config = {
     extensions = {}
 
 }
-
 
 
 require("lualine").setup(config)
