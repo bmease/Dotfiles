@@ -67,9 +67,12 @@ local mappings = {
     },
 
     v = {
-        name = "Vimrc",
+        name = "Neovim",
+        c = { "<cmd>lua require('telescope.builtin').colorscheme()<CR>", "Colorschemes" },
         e = { ":e $MYVIMRC<CR>"," Edit Neovim Init" },
         s = { ":luafile %<CR>:echo 'Sourced Neovim Init'<CR>", " Source Neovim Init" },
+        h = { ":checkhealth<CR>", "Check health"},
+        o = { "<cmd>lua require('telescope.builtin').vim_options()<CR>", "Neovim Options" },
     },
 
     ["?"] = { ":WhichKey<CR>", "Keymapping Help" }
