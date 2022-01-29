@@ -15,10 +15,10 @@ require'nvim-treesitter.configs'.setup {
 
     indent = {
         -- FIXME: Disabled due to issues where indentation doesn't work
-        enable = false
+        enable = true
     },
 
-    textObjects = {
+    textobjects = {
         --  text objects mappings similar to ip (inner paragraph) and
         --  ap (a paragraph)
         select = {
@@ -40,14 +40,7 @@ require'nvim-treesitter.configs'.setup {
         -- like function parameters or arguments
         swap = {
             enable = true,
-
-            swap_next = {
-                ["<leader>a"] = "@parameter.inner",
-            },
-
-            swap_previous = {
-                ["<leader>A"] = "@parameter.inner",
-            },
+            -- The keymappings are set below with whichkey
         }
     },
 
@@ -63,6 +56,32 @@ require'nvim-treesitter.configs'.setup {
         enable = true,
     }
 }
+
+
+local wk = require("which-key")
+
+local nmappings = {
+    s = {
+        name = "Swap",
+        p = { ":TSTextobjectSwapNext @parameter.inner<CR>", "Swap Paramater" },
+        P = { ":TSTextobjectSwapNext @parameter.outer<CR>", "Swap Paramater" },
+    },
+}
+
+wk.register(nmappings, { prefix = "<leader>" })
+
+local omappings = {
+    a = {
+        f = { "around function" },
+        c = { "around class" }
+    },
+    i = {
+        f = { "inside function" },
+        c = { "inside class" }
+    }
+}
+
+wk.register(omappings, { mode = "o" })
 
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
