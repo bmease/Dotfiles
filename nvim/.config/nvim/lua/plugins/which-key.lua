@@ -17,32 +17,29 @@ require("which-key").setup({
     },
 
     window = {
-        border = "rounded",
+        -- border = "rounded",
         -- style = "minimal",
-        winblend = 10
+        winblend = 0
     }
 
 })
 
 -- Highlight groups defined for WhichKey with their default link
 -- https://github.com/folke/which-key.nvim#-colors
-vim.cmd([[highlight default link WhichKey          htmlH1]])
-vim.cmd([[highlight default link WhichKeySeperator String]])
-vim.cmd([[highlight default link WhichKeyGroup     Keyword]])
-vim.cmd([[highlight default link WhichKeyDesc      Include]])
-vim.cmd([[highlight default link WhichKeyFloat     CursorLine]])
-vim.cmd([[highlight default link WhichKeyValue     Comment]])
+-- vim.cmd([[highlight default link WhichKey          htmlH1]])
+-- vim.cmd([[highlight default link WhichKeySeperator String]])
+-- vim.cmd([[highlight default link WhichKeyGroup     Keyword]])
+-- vim.cmd([[highlight default link WhichKeyDesc      Include]])
+-- vim.cmd([[highlight default link WhichKeyFloat     CursorLine]])
+-- vim.cmd([[highlight default link WhichKeyValue     Comment]])
 
+local highlight = require('utils').highlight
+local colors = require("tokyonight.colors").setup()
 
--- local opts = {
---   mode = "n", -- NORMAL mode
---   prefix = "<leader>",
---   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
---   silent = true, -- use `silent` when creating keymaps
---   noremap = true, -- use `noremap` when creating keymaps
---   nowait = false, -- use `nowait` when creating keymaps
--- }
---
+highlight('WhichKey', colors.purple, colors.bg_dark)
+highlight('WhichKeyFloat', colors.bg_dark, colors.bg_dark)
+highlight('WhichKeySeperator', colors.purple, colors.bg_dark)
+
 local opts = {
     prefix = "<leader>",
 }
