@@ -127,7 +127,12 @@ return require('packer').startup({function(use)
     }
 
     -- Treesitter powered spellchecker
-    use 'lewis6991/spellsitter.nvim'
+    use({
+        'lewis6991/spellsitter.nvim',
+        config = function()
+            require('spellsitter').setup()
+        end
+    })
 
     -- nvim-ts-context-commentstring
     -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file
