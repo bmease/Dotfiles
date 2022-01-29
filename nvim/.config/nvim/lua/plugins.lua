@@ -241,6 +241,10 @@ return require('packer').startup({function(use)
     -- A super powerful autopair plugin for Neovim
     use_with_config('windwp/nvim-autopairs', 'nvim-autopairs')
 
+    -- Quickfix Reflector
+    -- Change code right in the quickfix window
+    use "stefandtw/quickfix-reflector.vim"
+
     -- Neogen
     -- A better annotation generator.
     use_with_config(
