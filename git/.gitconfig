@@ -24,3 +24,5 @@
 	ui = true
 [format]
 	pretty = format:%Cred%h%Creset %C(bold blue)<%an>%Creset %s %Cblue(%cr)
+[init]
+	defaultBranch = main
