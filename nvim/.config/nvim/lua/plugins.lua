@@ -53,8 +53,6 @@ return require('packer').startup({function(use)
 
     -- Jellybeans
     -- A colorful, dark color scheme for Vim
-    use 'nanotech/jellybeans.vim'
-
     use {
         'metalelf0/jellybeans-nvim',
         requires = { 'rktjmp/lush.nvim' },
@@ -71,11 +69,6 @@ return require('packer').startup({function(use)
     -- use 'folke/tokyonight.nvim'
     use_with_config("folke/tokyonight.nvim", "tokyonight")
 
-    use "rafamadriz/neon"
-
-    use 'marko-cerovac/material.nvim'
-
-    use "catppuccin/nvim"
 
     -- Nvim-web-devicons
     -- Adds file type icons to Vim plugins
