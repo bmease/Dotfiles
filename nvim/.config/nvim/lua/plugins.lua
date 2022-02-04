@@ -239,6 +239,10 @@ return require('packer').startup({function(use)
     -- A super powerful autopair plugin for Neovim
     use_with_config('windwp/nvim-autopairs', 'nvim-autopairs')
 
+    -- Sort Motion
+    -- Vim mapping for sorting a range of text
+    use_with_config("christoomey/vim-sort-motion", "sort-motion")
+
     -- Quickfix Reflector
     -- Change code right in the quickfix window
     use "stefandtw/quickfix-reflector.vim"
