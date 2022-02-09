@@ -14,10 +14,10 @@ require('gitsigns').setup({
 local wk = require("which-key")
 
 local nmappings = {
-  ['['] = {
+  [']'] = {
     c = { "<cmd>Gitsigns next_hunk<CR>", "next hunk" }
   },
-  [']'] = {
+  ['['] = {
     c = { "<cmd>Gitsigns prev_hunk<CR>", "previous hunk" }
   }
 }
