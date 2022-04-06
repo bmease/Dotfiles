@@ -24,6 +24,20 @@ dashboard.section.buttons.val = {
 
 alpha.setup(dashboard.opts)
 
+
+-- Hide statusline when displaying dashboard
+vim.cmd([[
+    autocmd FileType alpha set laststatus=0
+    autocmd BufUnload <buffer> set laststatus=2
+]])
+
+-- Hide tabline when displaying dashboard
+vim.cmd([[
+    autocmd FileType alpha set showtabline=0
+    autocmd BufUnload <buffer> set showtabline=2
+]])
+
+
 -- Which-key mappings
 local mappings = {
     o = {
