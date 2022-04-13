@@ -69,6 +69,8 @@ return require('packer').startup({function(use)
     -- use 'folke/tokyonight.nvim'
     use_with_config("folke/tokyonight.nvim", "tokyonight")
 
+    use "rebelot/kanagawa.nvim"
+
 
     -- Nvim-web-devicons
     -- Adds file type icons to Vim plugins
